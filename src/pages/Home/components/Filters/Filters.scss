@@ -1,0 +1,37 @@
+@import 'base.scss';
+
+.component {
+  font-family: $ff-libre-b;
+  font-size: $fs-normal;
+  font-weight: 400;
+}
+
+.content {
+  display: flex;
+}
+
+.filtersPrimary {
+  display: flex;
+
+  .filter:nth-child(1) {
+    margin-right: $space-value * 4;
+  }
+}
+
+.filter {
+  display: flex;
+}
+
+.filterLabel {
+  margin-right: $space-value;
+  opacity: .4;
+}
+
+.filterValue {
+  font-style: italic;
+  color: white;
+}
+
+.filtersSecondary {
+  margin-left: auto;
+}

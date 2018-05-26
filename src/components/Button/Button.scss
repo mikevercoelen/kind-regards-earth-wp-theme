@@ -1,0 +1,45 @@
+@import 'base.scss';
+
+.component {
+  display: inline-block;
+  outline: 0;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background: transparent;
+  color: white;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1;
+  font-size: $fs-sub-text;
+  font-family: $ff-lato;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: ($space-value * 1.25) ($space-value * 2);
+  border: 2px solid rgba(255, 255, 255, .2);
+  transition: all 200ms ease;
+
+  &:hover {
+    background-color: white;
+    color: $color-text-dark;
+  }
+}
+
+.alt {
+  border: 0;
+  border-bottom: 2px dotted $color-dominant;
+  color: $color-dominant;
+  padding: $space-value * 1.125;
+
+  &:hover {
+    background: none transparent;
+    border-color: darken($color-dominant, 10%);
+    color: darken($color-dominant, 10%);
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}

@@ -1,0 +1,40 @@
+@import 'base.scss';
+
+.body {
+  background-color: white;
+  color: $color-text-dark;
+}
+
+.component {
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.bgImg {
+  @include retina-background('./404', 'png');
+  width: 692px;
+  height: 270px;
+  background-size: 692px 270px;
+}
+
+.title {
+  margin: 0;
+  padding: $space-value * 4;
+  font-family: $ff-libre-b;
+  font-size: $fs-heading;
+  font-weight: 700;
+}
+
+.btnBackIcon {
+  $scale: 1.2;
+
+  width: 7px * $scale;
+  height: 11px * $scale;
+  margin-right: $space-value;
+  transform: rotate(180deg);
+}

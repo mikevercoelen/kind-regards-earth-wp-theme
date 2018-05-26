@@ -1,0 +1,19 @@
+@import 'base.scss';
+
+:global {
+  body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    color: white;
+    background-color: $color-dark;
+
+    ::selection {
+      color: white;
+      background: $color-primary;
+    }
+  }
+
+  button {
+    user-select: none;
+  }
+}

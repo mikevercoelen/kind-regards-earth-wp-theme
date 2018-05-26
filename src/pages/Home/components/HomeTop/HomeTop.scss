@@ -1,0 +1,89 @@
+@import 'base.scss';
+
+$height: 120vh;
+
+.component {
+  width: 100%;
+  height: $height;
+}
+
+.headline {
+  margin: 0;
+  padding: 0;
+  font-family: $ff-libre-b;
+  font-weight: 700;
+  font-size: $fs-leading;
+  text-align: center;
+
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 250ms ease;
+
+    &:hover {
+      color: $color-dominant;
+    }
+  }
+
+  em {
+    font-weight: 400;
+  }
+}
+
+.btnReadLatest {
+  display: block;
+  margin-top: $space-value * 4;
+}
+
+.videoContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $height;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.video {
+  min-width: 100%;
+  min-height: $height;
+  width: auto;
+  height: auto;
+}
+
+.videoOverlay {
+  position: absolute;
+  z-index: 30;
+  min-width: 100%;
+  min-height: $height;
+  width: auto;
+  height: auto;
+  background-size: cover;
+  background: linear-gradient(180deg, rgba(35, 33, 34, 0) 0%, #232122 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15));
+}
+
+.topContent {
+  position: absolute;
+  z-index: 40;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.btnReadLatestIcon {
+  $scale: 1.2;
+
+  width: 7px * $scale;
+  height: 11px * $scale;
+  margin-left: $space-value;
+}

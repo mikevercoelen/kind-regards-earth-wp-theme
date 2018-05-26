@@ -1,0 +1,99 @@
+@import 'base.scss';
+
+.component {
+  background-color: $color-super-light;
+  display: flex;
+  padding: $space-value * 6 0;
+}
+
+.content {
+  max-width: $content-width;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.article {
+}
+
+.articleInner {
+  height: 240px;
+  max-width: 380px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.btnControl {
+  margin-top: $space-value * 4;
+  outline: 0;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: $ff-lato;
+  font-weight: 700;
+  align-items: center;
+  padding: $space-value;
+  border-bottom: 2px dotted $color-dominant;
+  -webkit-appearance: none;
+  font-size: $fs-normal;
+  color: $color-dominant;
+  position: relative;
+  text-decoration: none;
+}
+
+.btnPrevious {
+  width: 166px;
+
+  .btnControlIcon {
+    transform: rotate(180deg);
+    margin-right: $space-value;
+  }
+
+  &:hover {
+    .btnControlIcon {
+      transform: translateX(-5px) rotate(180deg);
+    }
+
+    .btnControlLabel {
+      transform: translateX(-5px);
+    }
+  }
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+}
+
+.btnNext {
+  // margin-right: -$space-value * 4;
+  margin-left: auto;
+  width: 130px;
+
+  &:hover {
+    .btnControlIcon {
+      transform: translateX(5px);
+    }
+
+    .btnControlLabel {
+      transform: translateX(5px);
+    }
+  }
+
+  .btnControlIcon {
+    margin-left: $space-value;
+  }
+}
+
+.btnControlIcon {
+  $scale: .2;
+
+  transition: transform 180ms ease;
+  width: 65px * $scale;
+  height: 57px * $scale;
+}
+
+.btnControlLabel {
+  transition: transform 180ms ease;
+}

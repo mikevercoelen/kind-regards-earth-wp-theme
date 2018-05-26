@@ -1,0 +1,10 @@
+@import 'base.scss';
+
+.component {
+  max-width: $content-width;
+  margin: 0 auto;
+
+  &.narrow {
+    max-width: $content-width-narrow;
+  }
+}

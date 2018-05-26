@@ -1,0 +1,25 @@
+@import 'base.scss';
+
+.component {
+  position: fixed;
+  right: $space-value * 4;
+  bottom: $space-value * 6;
+  z-index: 80;
+  cursor: pointer;
+  transition: transform 120ms ease, opacity 120ms ease;
+  opacity: 0;
+  transform: scale(0.8);
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  svg {
+    fill: #757575;
+  }
+}
+
+.hasScrolledDown {
+  transform: none;
+  opacity: 1;
+}

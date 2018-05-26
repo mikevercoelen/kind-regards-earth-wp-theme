@@ -1,0 +1,141 @@
+@import 'base.scss';
+
+.component {
+  font-family: $ff-crimson-text;
+  color: $color-text-dark;
+  padding-top: $space-value * 6;
+  background-color: white;
+  font-size: $fs-copy;
+}
+
+.content {
+  padding-bottom: $space-value * 6;
+}
+
+.textContent {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.articleContent {
+  strong {
+    line-height: 1;
+  }
+
+  a {
+    color: $color-dominant;
+    transition: color 120ms ease;
+
+    &:hover {
+      color: darken($color-dominant, 10%);
+    }
+  }
+
+  > p {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: justify;
+    line-height: 1.5;
+  }
+
+  blockquote {
+    display: flex;
+    padding: $space-value * 2 0;
+    max-width: $content-width * 0.8;
+    margin: 0 auto;
+
+    &:before {
+      content: '';
+      flex-grow: 1;
+      display: block;
+      width: 10px;
+      background-color: $color-primary;
+    }
+
+    p {
+      max-width: auto !important;
+      margin: 0;
+      padding: $space-value * 2 0;
+      margin-left: $space-value * 2;
+      font-style: italic;
+      font-family: $ff-crimson-text;
+      font-size: $fs-heading;
+      font-weight: 700;
+    }
+  }
+
+  figure {
+    padding: $space-value * 4 0;
+
+    img {
+      display: inline-block;
+    }
+
+    figcaption {
+      text-align: center;
+      padding-top: $space-value;
+      color: $color-sub-text;
+      font-weight: 400;
+      font-family: $ff-lato;
+      font-size: $fs-small;
+    }
+  }
+}
+
+.date {
+  font-style: italic;
+  text-decoration: underline;
+  color: $color-sub-text;
+}
+
+.title {
+  font-size: $fs-leading;
+  font-family: $ff-libre-b;
+  font-weight: 700;
+  margin: 0;
+  padding-top: $space-value * 2;
+  padding-bottom: $space-value * 2;
+}
+
+.subtitle {
+  margin: 0;
+  padding: 0;
+  font-family: $ff-libre-b;
+  font-size: $fs-heading;
+  font-weight: normal;
+  padding-bottom: $space-value * 2;
+}
+
+.btnCommentsWrap {
+  display: flex;
+  justify-content: center;
+  padding-top: $space-value * 6;
+}
+
+.btnComments {
+  outline: 0;
+  cursor: pointer;
+  display: flex;
+  font-family: $ff-lato;
+  font-weight: 700;
+  align-items: center;
+  border: 0;
+  -webkit-appearance: none;
+  font-size: $fs-normal;
+  color: $color-dominant;
+  position: relative;
+}
+
+.btnCommentsIcon {
+  $scale: 1.0;
+
+  width: 22px * $scale;
+  height: 23px * $scale;
+  margin-right: $space-value;
+}
+
+.btnCommentsLabel {
+  width: 110px;
+  border-bottom: 2px dotted $color-dominant;
+  line-height: 1.7;
+}

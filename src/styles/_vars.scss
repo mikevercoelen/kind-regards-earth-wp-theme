@@ -1,3 +1,25 @@
+$color-purple: #332FED;
+$color-green: #95a5a6;
+$color-blue: #8395a7;
+
+$color-dark: #232122;
+$color-primary: $color-green;
+$color-secondary: $color-green;
+$color-text-dark: #181818;
+$color-sub-text: #bababa;
+$color-dominant: #2e86de;
+$color-super-light: #fafafa;
+
+$content-width: 1050px;
+$content-width-narrow: 690px;
+$space-value: 10px;
+
+$z-header: 100;
+$z-menu: 90;
+
+$header-height: 80px;
+$footer-height: 140px;
+
 $breakpoints: (
   phone: 320px,
   tablet: 768px,
@@ -5,3 +27,21 @@ $breakpoints: (
   medium: 768px,
   small: 500px
 );
+
+
+// typography
+
+$ff-lato: 'Lato', sans-serif;
+$ff-libre-b: 'Libre Baskerville', serif;
+$ff-crimson-text: 'Crimson Text', serif;
+
+$ff-body: $ff-crimson-text;
+
+$fs-normal: 18px;
+$fs-small: 16px;
+$fs-sub-text: 11px;
+$fs-leading: 64px;
+$fs-heading: 36px;
+$fs-copy: 27px;
+
+$fs-body: 14px;

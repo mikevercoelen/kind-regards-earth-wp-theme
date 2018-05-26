@@ -1,0 +1,29 @@
+@import 'base.scss';
+
+.component {
+  transition: opacity 320ms, transform 220ms;
+  opacity: 0;
+  transform: translateY(30px);
+  width: 100%;
+  height: 100%;
+
+  &--exited {
+    display: none;
+  }
+
+  &--exiting {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  &--entering {
+    display: block;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  &--entered {
+    opacity: 1;
+    transform: none;
+  }
+}

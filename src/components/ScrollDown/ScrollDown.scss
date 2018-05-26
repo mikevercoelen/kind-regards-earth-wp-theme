@@ -1,0 +1,66 @@
+@import 'base.scss';
+
+.component {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: $space-value * 2;
+  opacity: .6;
+  transition: opacity 180ms ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.label {
+  font-family: $ff-lato;
+  text-transform: uppercase;
+  font-size: $fs-sub-text;
+  letter-spacing: 1.2px;
+  font-weight: 900;
+  margin-top: $space-value * 2;
+  margin-right: $space-value;
+}
+
+.iconWrap {
+  animation: animation 2s infinite;
+}
+
+.icon {
+  $scale: .3;
+  width: 65px * $scale;
+  height: 57px * $scale;
+  transform: rotate(90deg);
+}
+
+@keyframes animation {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  80% {
+    transform: translate(0, 10px);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

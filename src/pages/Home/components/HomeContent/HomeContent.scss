@@ -1,0 +1,76 @@
+@import 'base.scss';
+
+.component {
+  position: relative;
+  margin-top: calc(-15vh - 30px);
+  z-index: 80;
+  padding-top: 30px;
+}
+
+.articles {
+  padding-top: $space-value * 3;
+  padding-bottom: $space-value * 6;
+}
+
+.articlesRow {
+  margin-top: $space-value * 3;
+  display: flex;
+
+  .article {
+    margin-right: $space-value * 3;
+  }
+}
+
+.loader {
+  display: flex;
+  width: 100%;
+  align-content: center;
+  justify-content: center;
+  padding: $space-value * 20 0;
+}
+
+.pagination {
+  display: flex;
+}
+
+.paginationInner {
+  margin-left: auto;
+  font-family: $ff-libre-b;
+  font-size: $fs-normal;
+  display: flex;
+  padding-bottom: $space-value * 6;
+}
+
+.paginationLabel {
+  margin-right: $space-value * 2.5;
+}
+
+.pages {
+  display: flex;
+}
+
+.scrollLoader {
+  display: flex;
+  width: 100%;
+  align-content: center;
+  justify-content: center;
+  padding: $space-value * 6 0;
+}
+
+.page {
+  font-style: italic;
+  opacity: .5;
+  margin-right: $space-value * 1.5;
+  cursor: pointer;
+  font-size: $fs-small;
+  line-height: 24px;
+
+  &:first-child {
+    opacity: 1;
+    font-size: $fs-normal;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
