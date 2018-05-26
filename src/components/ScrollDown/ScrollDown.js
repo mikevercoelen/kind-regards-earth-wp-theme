@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import SmoothScroll from 'smooth-scroll'
 import styles from './ScrollDown.scss'
 import IconNextArrow from 'components/IconNextArrow/IconNextArrow'
+import cx from 'classnames'
 
 const scroll = new SmoothScroll()
 
@@ -28,7 +29,7 @@ export default class ScrollDown extends React.Component {
     return (
       <div
         onClick={this.handleScrollDownClick}
-        className={styles.component}>
+        className={cx(styles.component)}>
         <div className={styles.content}>
           <div className={styles.label}>
             {label}

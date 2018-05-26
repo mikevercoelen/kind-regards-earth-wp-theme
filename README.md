@@ -5,5 +5,5 @@ This is the Wordpress theme build in React for [http://kindregardsearth.com](htt
 
 ```shell
 npm install
-npm run dev
+npm start
 ```

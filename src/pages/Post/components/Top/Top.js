@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Top.scss'
 import ScrollDown from 'components/ScrollDown/ScrollDown'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 const getId = () => {
   return (+new Date()).toString()
@@ -9,7 +9,7 @@ const getId = () => {
 
 export default class Top extends React.Component {
   static propTypes = {
-    // article: PropTypes.object
+    article: PropTypes.object
   }
 
   id = null
@@ -35,6 +35,12 @@ export default class Top extends React.Component {
   }
 
   initializePlayer ({ article }) {
+    const hasYoutubeId = article.youtubeId
+
+    if (!hasYoutubeId) {
+      return
+    }
+
     setTimeout(() => {
       this.player = new window.YT.Player(this.id, {
         videoId: article.youtubeId,
@@ -49,15 +55,6 @@ export default class Top extends React.Component {
           disablekb: 1,
           cc_load_policy: 0
         }
-        // events: {
-        //   onStateChange: (e) => {
-        //     const isPlaying = e.target.getPlayerState() === 1
-        //
-        //     if (isPlaying) {
-        //       this.props.onReady()
-        //     }
-        //   }
-        // }
       })
     })
   }
@@ -70,16 +67,44 @@ export default class Top extends React.Component {
     this.initializePlayer(this.props)
   }
 
-  render () {
-    return (
-      <div className={styles.component} onClick={this.handleClick}>
-        <div className={styles.videoContainer}>
+  get background () {
+    const { article } = this.props
+
+    const hasYoutubeId = article.youtubeId
+
+    if (hasYoutubeId) {
+      return (
+        <div
+          onClick={this.handleClick}
+          className={styles.videoContainer}>
           <div className={styles.videoBg}>
             <div className={styles.videoFg}>
               <div id={this.id} />
             </div>
           </div>
         </div>
+      )
+    }
+
+    const hasImage = article.img && article.img.full
+
+    if (hasImage) {
+      return (
+        <div
+          style={{
+            backgroundImage: `url(${article.img.full.src})`
+          }}
+          className={styles.imageBackground} />
+      )
+    }
+
+    return null
+  }
+
+  render () {
+    return (
+      <div className={styles.component}>
+        {this.background}
         <ScrollDown
           label='Start reading'
           to='#inner' />

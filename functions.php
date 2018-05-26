@@ -161,7 +161,6 @@ add_filter('rest_prepare_post', function($response, $post, $request) {
 add_filter('rest_allow_anonymous_comments', '__return_true');
 
 // Include extra functionality.
-require get_template_directory() . '/inc/load-data.php';
 require get_template_directory() . '/inc/permalinks.php';
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/short-codes.php';

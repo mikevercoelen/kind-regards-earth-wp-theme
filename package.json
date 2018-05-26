@@ -9,7 +9,7 @@
     "precommit": "lint-staged",
     "clean": "rimraf ./build",
     "zip": "npm run build && node ./tools/zipTheme.js",
-    "watch": "npm run clean && NODE_ENV=development webpack --watch --config ./tools/config/webpackConfig.js",
+    "start": "npm run clean && NODE_ENV=development webpack --watch --config ./tools/config/webpackConfig.js",
     "build": "npm run clean && NODE_ENV=production webpack --config ./tools/config/webpackConfig.js",
     "dev": "npm run watch",
     "prepush": "npm run build"

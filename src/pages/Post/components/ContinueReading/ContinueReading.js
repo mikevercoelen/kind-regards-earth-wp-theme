@@ -18,39 +18,35 @@ const ContinueReading = ({ article }) => {
     <div className={styles.component}>
       <div className={styles.content}>
         {previous && (
-          <div className={styles.previous}>
-            <div className={styles.article}>
-              <div className={styles.articleInner}>
-                <Article
-                  article={previous}
-                  minimal />
-              </div>
-              <Link to={getPostRoute(previous.slug)} className={`${styles.btnControl} ${styles.btnPrevious}`}>
-                <IconNextArrow
-                  className={styles.btnControlIcon} />
-                <div className={styles.btnControlLabel}>
-                  Previous story
-                </div>
-              </Link>
+          <div className={styles.article}>
+            <div className={styles.articleInner}>
+              <Article
+                article={previous}
+                minimal />
             </div>
+            <Link to={getPostRoute(previous.slug)} className={`${styles.btnControl} ${styles.btnPrevious}`}>
+              <IconNextArrow
+                className={styles.btnControlIcon} />
+              <div className={styles.btnControlLabel}>
+                Previous story
+              </div>
+            </Link>
           </div>
         )}
         {next && (
-          <div className={styles.next}>
-            <div className={styles.article}>
-              <div className={styles.articleInner}>
-                <Article
-                  article={next}
-                  minimal />
-              </div>
-              <Link to={getPostRoute(next.slug)} className={`${styles.btnControl} ${styles.btnNext}`}>
-                <div className={styles.btnControlLabel}>
-                  Next story
-                </div>
-                <IconNextArrow
-                  className={styles.btnControlIcon} />
-              </Link>
+          <div className={styles.article}>
+            <div className={styles.articleInner}>
+              <Article
+                article={next}
+                minimal />
             </div>
+            <Link to={getPostRoute(next.slug)} className={`${styles.btnControl} ${styles.btnNext}`}>
+              <div className={styles.btnControlLabel}>
+                Next story
+              </div>
+              <IconNextArrow
+                className={styles.btnControlIcon} />
+            </Link>
           </div>
         )}
       </div>
