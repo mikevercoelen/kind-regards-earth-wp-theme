@@ -3,20 +3,18 @@ import actions, { constants } from 'actions/posts'
 import api from 'api/wp'
 import { normalize } from 'normalizr'
 import * as schemas from 'schemas'
+import * as config from 'config'
 
-const ARTICLES_PER_PAGE = 3
-
-export function * onPostsLoad () {
+export function * onPostsLoad ({ payload: { page } }) {
   yield put(actions.postsLoadRequest.start())
 
   try {
-    const posts = yield call(api.getPosts, ARTICLES_PER_PAGE, 1)
+    const posts = yield call(api.getPosts, config.ARTICLES_PER_LOAD, page)
     const norm = yield call(normalize, posts, [schemas.post])
 
     yield put(actions.postsLoadRequest.success({
       posts: norm,
-      total: Number(posts._paging.total),
-      lastPage: Number(posts._paging.totalPages) + 1
+      totalPages: Number(posts._paging.totalPages)
     }))
   } catch (error) {
     yield put(actions.postsLoadRequest.error(error))
@@ -72,36 +70,10 @@ export function * onPostLoadById ({ payload: id }) {
   }
 }
 
-export function * onCategoriesLoad () {
-  yield put(actions.categoriesLoadRequest.start())
-
-  try {
-    const categories = yield call(api.getCategories)
-    const norm = yield call(normalize, categories, [schemas.category])
-    yield put(actions.categoriesLoadRequest.success(norm))
-  } catch (error) {
-    yield put(actions.categoriesLoadRequest.error(error))
-  }
-}
-
-export function * onMediaLoad () {
-  yield put(actions.mediaLoadRequest.start())
-
-  try {
-    const media = yield call(api.getMedia)
-    const norm = yield call(normalize, media, [schemas.media])
-    yield put(actions.mediaLoadRequest.success(norm))
-  } catch (error) {
-    yield put(actions.mediaLoadRequest.error(error))
-  }
-}
-
 export default function * watchPosts () {
   yield all([
     takeLatest(constants.POSTS_LOAD, onPostsLoad),
     takeLatest(constants.POST_LOAD_BY_SLUG, onPostLoadBySlug),
-    takeLatest(constants.POST_LOAD_BY_ID, onPostLoadById),
-    takeLatest(constants.CATEGORIES_LOAD, onCategoriesLoad),
-    takeLatest(constants.MEDIA_LOAD, onMediaLoad)
+    takeLatest(constants.POST_LOAD_BY_ID, onPostLoadById)
   ])
 }

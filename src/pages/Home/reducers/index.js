@@ -6,7 +6,7 @@ import {
 } from 'actions/posts'
 
 export const initialState = fromJS({
-  currentPage: 1,
+  nextPage: 1,
   totalPages: null,
   hasMore: true,
   hasInitiallyLoaded: false
@@ -14,15 +14,14 @@ export const initialState = fromJS({
 
 export default createReducer(initialState, {
   [POSTS_LOAD_REQUEST.SUCCESS]: (state, { payload }) => {
-    const newCurrentPage = state.get('currentPage') + 1
+    const newNextPage = state.get('nextPage') + 1
     const totalPages = payload.totalPages
-
-    console.log('The total pages are: ' + totalPages)
-    console.log('New current page: ' + newCurrentPage)
+    const hasMore = (newNextPage <= totalPages)
 
     return state
-      .set('currentPage', newCurrentPage)
+      .set('nextPage', newNextPage)
       .set('totalPages', totalPages)
       .set('hasInitiallyLoaded', true)
+      .set('hasMore', hasMore)
   }
 })

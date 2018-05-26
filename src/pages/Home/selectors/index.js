@@ -2,8 +2,8 @@ export const getHasMore = state => {
   return state.home.get('hasMore')
 }
 
-export const getCurrentPage = state => {
-  return state.home.get('currentPage')
+export const getNextPage = state => {
+  return state.home.get('nextPage')
 }
 
 export const getHasInitiallyLoaded = state => {

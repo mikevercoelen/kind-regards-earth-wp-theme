@@ -12,7 +12,9 @@ class Home extends React.Component {
   }
 
   componentWillMount () {
-    this.props.postsLoad()
+    this.props.postsLoad({
+      page: 1
+    })
   }
 
   render () {

@@ -18,7 +18,7 @@ import {
 import {
   getHasMore,
   getHasInitiallyLoaded,
-  getCurrentPage
+  getNextPage
 } from '../../selectors'
 
 class HomeContent extends React.Component {
@@ -27,14 +27,16 @@ class HomeContent extends React.Component {
     postsLoad: PropTypes.func.isRequired,
     hasMore: PropTypes.bool.isRequired,
     hasInitiallyLoaded: PropTypes.bool.isRequired,
-    currentPage: PropTypes.number.isRequired
+    nextPage: PropTypes.number.isRequired
   }
 
   handleLoadMore = () => {
-    const { currentPage } = this.props
+    const { nextPage } = this.props
+
+    console.log('lol')
 
     this.props.postsLoad({
-      page: currentPage + 1
+      page: nextPage
     })
   }
 
@@ -121,7 +123,7 @@ const mapStateToProps = state => ({
   posts: getPosts(state),
   hasMore: getHasMore(state),
   hasInitiallyLoaded: getHasInitiallyLoaded(state),
-  currentPage: getCurrentPage(state)
+  nextPage: getNextPage(state)
 })
 
 const mapActionsToProps = {

@@ -11,10 +11,11 @@ const Article = ({ article, isWide, isLatest, minimal }) => {
     return null
   }
 
-  let category = ''
+  let categoryLabel = ''
 
-  if (article.category && article.category.name) {
-    category = isLatest ? `Latest ${article.category.name}` : article.category.name
+  if (article.categories) {
+    const firstCategory = article.categories.first()
+    categoryLabel = isLatest ? `Latest ${firstCategory.get('name')}` : firstCategory.get('name')
   }
 
   return (
@@ -32,7 +33,7 @@ const Article = ({ article, isWide, isLatest, minimal }) => {
       )}
       <div className={styles.content}>
         <div className={styles.category}>
-          {category}
+          {categoryLabel}
         </div>
         <h2
           className={styles.title}

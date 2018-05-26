@@ -3,16 +3,12 @@ import { fromJS } from 'immutable'
 
 import {
   POSTS_LOAD_REQUEST,
-  POST_LOAD_BY_SLUG_REQUEST,
-  CATEGORIES_LOAD_REQUEST,
-  MEDIA_LOAD_REQUEST
+  POST_LOAD_BY_SLUG_REQUEST
 } from 'actions/posts'
 
 export const initialState = fromJS({
   posts: {},
-  pages: {},
-  categories: {},
-  media: {}
+  pages: {}
 })
 
 const mergeEntities = (state, { payload }) => {
@@ -30,7 +26,5 @@ export default createReducer(initialState, {
       payload: action.payload.posts
     })
   },
-  [POST_LOAD_BY_SLUG_REQUEST.SUCCESS]: mergeEntities,
-  [CATEGORIES_LOAD_REQUEST.SUCCESS]: mergeEntities,
-  [MEDIA_LOAD_REQUEST.SUCCESS]: mergeEntities
+  [POST_LOAD_BY_SLUG_REQUEST.SUCCESS]: mergeEntities
 })

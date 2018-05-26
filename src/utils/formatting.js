@@ -7,10 +7,14 @@ export const postToArticle = (post) => {
 
   const mDate = moment(post.get('date'))
 
+  const author = post.getIn(['_embedded', 'author', 0])
+  const categories = post.getIn(['_embedded', 'wp:term', 0])
+
   const article = {
+    author,
+    categories,
     slug: post.get('slug'),
     title: post.getIn(['title', 'rendered']),
-    category: post.getIn(['categories', 0]),
     date: mDate.format(`do of MMMM 'YY`),
     description: post.getIn(['excerpt', 'rendered']),
     readingTime: post.getIn(['acf', 'readingtime']),
@@ -21,7 +25,7 @@ export const postToArticle = (post) => {
     img: {}
   }
 
-  const featuredMedia = post.get('featured_media')
+  const featuredMedia = post.getIn(['_embedded', 'wp:featuredmedia', 0])
 
   if (featuredMedia) {
     const mediumLarge = featuredMedia.getIn(['media_details', 'sizes', 'medium_large'])
