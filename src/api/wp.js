@@ -11,6 +11,7 @@ const getPosts = (perPage, page) => wp
   .page(page)
   .order('asc')
   .orderby('date')
+  .embed()
 
 const getPostBySlug = slug => wp
   .posts()
@@ -20,13 +21,8 @@ const getPostById = id => wp
   .posts()
   .id(id)
 
-const getCategories = () => wp.categories()
-const getMedia = id => wp.media()
-
 export default {
   getPosts,
-  getCategories,
-  getMedia,
   getPostBySlug,
   getPostById
 }

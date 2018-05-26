@@ -1,8 +1,8 @@
-import { takeLatest, put, all, call, select } from 'redux-saga/effects'
+import { takeLatest, put, all, call } from 'redux-saga/effects'
 import actions, { constants } from 'actions/posts'
 import api from 'api/wp'
-import { getPage } from 'selectors/home'
-import { setPage } from 'actions/home'
+import { normalize } from 'normalizr'
+import * as schemas from 'schemas'
 
 const ARTICLES_PER_PAGE = 3
 
@@ -10,16 +10,14 @@ export function * onPostsLoad () {
   yield put(actions.postsLoadRequest.start())
 
   try {
-    const page = yield select(getPage)
-    const posts = yield call(api.getPosts, ARTICLES_PER_PAGE, page)
+    const posts = yield call(api.getPosts, ARTICLES_PER_PAGE, 1)
+    const norm = yield call(normalize, posts, [schemas.post])
 
     yield put(actions.postsLoadRequest.success({
-      posts,
+      posts: norm,
       total: Number(posts._paging.total),
-      totalPages: Number(posts._paging.totalPages)
+      lastPage: Number(posts._paging.totalPages) + 1
     }))
-
-    yield put(setPage(page + 1))
   } catch (error) {
     yield put(actions.postsLoadRequest.error(error))
   }
@@ -67,7 +65,8 @@ export function * onPostLoadById ({ payload: id }) {
 
   try {
     const post = yield call(api.getPostById, id)
-    yield put(actions.postLoadByIdRequest.success(post))
+    const norm = yield call(normalize, post, schemas.post)
+    yield put(actions.postLoadByIdRequest.success(norm))
   } catch (error) {
     yield put(actions.postLoadByIdRequest.error(error))
   }
@@ -78,7 +77,8 @@ export function * onCategoriesLoad () {
 
   try {
     const categories = yield call(api.getCategories)
-    yield put(actions.categoriesLoadRequest.success(categories))
+    const norm = yield call(normalize, categories, [schemas.category])
+    yield put(actions.categoriesLoadRequest.success(norm))
   } catch (error) {
     yield put(actions.categoriesLoadRequest.error(error))
   }
@@ -89,7 +89,8 @@ export function * onMediaLoad () {
 
   try {
     const media = yield call(api.getMedia)
-    yield put(actions.mediaLoadRequest.success(media))
+    const norm = yield call(normalize, media, [schemas.media])
+    yield put(actions.mediaLoadRequest.success(norm))
   } catch (error) {
     yield put(actions.mediaLoadRequest.error(error))
   }

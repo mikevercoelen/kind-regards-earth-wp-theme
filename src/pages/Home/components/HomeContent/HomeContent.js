@@ -6,74 +6,46 @@ import Article from '../../../../components/Article/Article'
 import Content from 'components/Content/Content'
 import Loader from 'components/Loader/Loader'
 import { connect } from 'react-redux'
-import { postsLoad, categoriesLoad, mediaLoad } from 'actions/posts'
+import { postsLoad } from 'actions/posts'
 import { postToArticle } from 'utils/formatting'
-import InfiniteScroll from 'react-infinite-scroller'
-import { getPage } from 'selectors/home'
+import InfiniteScroll from 'components/InfiniteScroll/InfiniteScroll'
+import { Map } from 'immutable'
 
 import {
-  getPosts,
-  getCategories,
-  getMedia,
-  getHasAllPostDataLoaded,
-  getTotalPages
-} from 'selectors/posts'
+  getPosts
+} from 'selectors/entities'
+
+import {
+  getHasMore,
+  getHasInitiallyLoaded,
+  getCurrentPage
+} from '../../selectors'
 
 class HomeContent extends React.Component {
   static propTypes = {
-    posts: PropTypes.array.isRequired,
-    categories: PropTypes.array.isRequired,
-    media: PropTypes.array.isRequired,
+    posts: PropTypes.instanceOf(Map).isRequired,
     postsLoad: PropTypes.func.isRequired,
-    hasAllPostDataLoaded: PropTypes.bool,
-    totalPages: PropTypes.number,
-    page: PropTypes.number.isRequired
-  }
-
-  // TODO: re-enable pagination?
-  get pagination () {
-    return null
-
-    // return (
-    //   <div className={styles.pagination}>
-    //     <div className={styles.paginationInner}>
-    //       <div className={styles.paginationLabel}>
-    //         Page:
-    //       </div>
-    //       <div className={styles.pages}>
-    //         <div className={styles.page}>
-    //           1
-    //         </div>
-    //         <div className={styles.page}>
-    //           2
-    //         </div>
-    //         <div className={styles.page}>
-    //           3
-    //         </div>
-    //         <div className={styles.page}>
-    //           4
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // )
+    hasMore: PropTypes.bool.isRequired,
+    hasInitiallyLoaded: PropTypes.bool.isRequired,
+    currentPage: PropTypes.number.isRequired
   }
 
   handleLoadMore = () => {
-    this.props.postsLoad()
+    const { currentPage } = this.props
+
+    this.props.postsLoad({
+      page: currentPage + 1
+    })
   }
 
   render () {
     const {
       posts,
-      categories,
-      media,
-      hasAllPostDataLoaded,
-      totalPages,
-      page
+      hasMore,
+      hasInitiallyLoaded
     } = this.props
 
-    if (!hasAllPostDataLoaded) {
+    if (!hasInitiallyLoaded) {
       return (
         <div className={styles.component} id='articles'>
           <div className={styles.loader}>
@@ -83,28 +55,31 @@ class HomeContent extends React.Component {
       )
     }
 
+    const postCount = posts.count()
+
     // TODO: "empty placeholder?"
-    if (posts.length === 0) {
+    if (postCount === 0) {
       return null
     }
 
-    const latestPost = posts[0]
+    const latestPost = posts.first()
+    const postsArray = posts.valueSeq().toArray()
     const articleRows = []
 
-    for (let i = 1, postsLength = posts.length; i < postsLength; i++) {
-      const post = posts[i]
-      const nextPost = posts[i + 1]
+    for (let i = 1, postsLength = postCount; i < postsLength; i++) {
+      const post = postsArray[i]
+      const nextPost = postsArray[i + 1]
 
       const nextPostElement = nextPost && (
         <div className={styles.article}>
-          <Article article={postToArticle(nextPost, categories, media)} />
+          <Article article={postToArticle(nextPost)} />
         </div>
       )
 
       articleRows.push((
         <div key={i} className={styles.articlesRow}>
           <div className={styles.article}>
-            <Article article={postToArticle(post, categories, media)} />
+            <Article article={postToArticle(post)} />
           </div>
           {nextPostElement}
         </div>
@@ -113,7 +88,6 @@ class HomeContent extends React.Component {
       i++
     }
 
-    const hasMore = page < totalPages
     const scrollLoader = (
       <div key='scroll-loader' className={styles.scrollLoader}>
         <Loader />
@@ -133,11 +107,10 @@ class HomeContent extends React.Component {
                 key='article-latest'
                 isWide
                 isLatest
-                article={postToArticle(latestPost, categories, media)} />
+                article={postToArticle(latestPost)} />
               {articleRows}
             </InfiniteScroll>
           </div>
-          {this.pagination}
         </Content>
       </div>
     )
@@ -146,17 +119,13 @@ class HomeContent extends React.Component {
 
 const mapStateToProps = state => ({
   posts: getPosts(state),
-  categories: getCategories(state),
-  media: getMedia(state),
-  hasAllPostDataLoaded: getHasAllPostDataLoaded(state),
-  totalPages: getTotalPages(state),
-  page: getPage(state)
+  hasMore: getHasMore(state),
+  hasInitiallyLoaded: getHasInitiallyLoaded(state),
+  currentPage: getCurrentPage(state)
 })
 
 const mapActionsToProps = {
-  postsLoad,
-  categoriesLoad,
-  mediaLoad
+  postsLoad
 }
 
 export default connect(

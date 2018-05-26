@@ -3,45 +3,16 @@ import PropTypes from 'prop-types'
 import HomeTop from './components/HomeTop/HomeTop'
 import HomeContent from './components/HomeContent/HomeContent'
 import Page from 'components/Page/Page'
-import { setPageLoaded } from 'actions/app'
 import { connect } from 'react-redux'
-import { postsLoad, categoriesLoad, mediaLoad } from 'actions/posts'
-import { getHasPostsLoaded } from 'selectors/posts'
-
-const loadVideo = () => new Promise(resolve => {
-  const readyChecker = setInterval(() => {
-    const videoBgElement = document.getElementById('video-bg')
-
-    if (videoBgElement && videoBgElement.readyState >= 3) {
-      resolve()
-      clearInterval(readyChecker)
-    }
-  }, 300)
-})
+import { postsLoad } from 'actions/posts'
 
 class Home extends React.Component {
   static propTypes = {
-    setPageLoaded: PropTypes.func,
-    postsLoad: PropTypes.func.isRequired,
-    categoriesLoad: PropTypes.func.isRequired,
-    mediaLoad: PropTypes.func.isRequired,
-    hasPostsLoaded: PropTypes.bool.isRequired
-  }
-
-  componentWillReceiveProps (nextProps) {
-    const { hasPostsLoaded, setPageLoaded } = nextProps
-
-    if (hasPostsLoaded) {
-      loadVideo().then(() => setPageLoaded(true))
-    }
+    postsLoad: PropTypes.func.isRequired
   }
 
   componentWillMount () {
-    const { postsLoad, categoriesLoad, mediaLoad } = this.props
-
-    categoriesLoad()
-    mediaLoad()
-    postsLoad()
+    this.props.postsLoad()
   }
 
   render () {
@@ -54,18 +25,11 @@ class Home extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  hasPostsLoaded: getHasPostsLoaded(state)
-})
-
 const mapActionsToProps = {
-  setPageLoaded,
-  postsLoad,
-  categoriesLoad,
-  mediaLoad
+  postsLoad
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapActionsToProps
 )(Home)

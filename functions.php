@@ -5,7 +5,7 @@ if (!defined('KRE_VERSION')) {
 }
 
 if (!defined('KRE_APP')) {
-  define('KRE_APP', 'kre-react');
+  define('KRE_APP', 'kre');
 }
 
 /**
@@ -67,7 +67,7 @@ function kre_scripts() {
   );
 
 	if (is_child_theme()) {
-		wp_enqueue_style( 'kre-child-style', get_stylesheet_uri() );
+		wp_enqueue_style('kre-child-style', get_stylesheet_uri());
 	}
 
 	$url = trailingslashit(home_url());
@@ -76,7 +76,7 @@ function kre_scripts() {
 	$front_page_slug = false;
 	$blog_page_slug = false;
 
-	if ( 'posts' !== get_option('show_on_front') ) {
+	if ('posts' !== get_option('show_on_front')) {
 		$front_page_id = get_option('page_on_front');
 		$front_page = get_post( $front_page_id );
 
@@ -115,7 +115,7 @@ function kre_scripts() {
 				'title' => get_bloginfo('name', 'display'),
 				'description' => get_bloginfo('description', 'display'),
 			),
-		) )
+		))
 	);
 
 	wp_add_inline_script(KRE_APP, $kre_settings, 'before');
@@ -146,15 +146,16 @@ add_filter('rest_page_query', 'kre_add_path_to_page_query', 10, 2);
 // }
 
 // Add `next` and `previous` to the objects
-add_filter('rest_prepare_post', function( $response, $post, $request ) {
+add_filter('rest_prepare_post', function($response, $post, $request) {
   global $post;
-  $next = get_adjacent_post( false, '', false );
-  $previous = get_adjacent_post( false, '', true );
+  $nextPost = get_adjacent_post( false, '', false );
+  $previousPost = get_adjacent_post( false, '', true );
 
-  $response->data['next'] = ( is_a( $next, 'WP_Post') ) ? array( "id" => $next->ID, "slug" => $next->post_name ) : null;
-  $response->data['previous'] = ( is_a( $previous, 'WP_Post') ) ? array( "id" => $previous->ID, "slug" => $previous->post_name ) : null;
+  $response->data['nextPost'] = (is_a($nextPost, 'WP_Post')) ? $nextPost->ID : null;
+  $response->data['previousPost'] = (is_a($previousPost, 'WP_Post')) ? $previousPost->ID : null;
+
   return $response;
-}, 10, 3 );
+}, 10, 3);
 
 // Allow anon comments via API when using this theme.
 add_filter('rest_allow_anonymous_comments', '__return_true');
@@ -165,25 +166,9 @@ require get_template_directory() . '/inc/permalinks.php';
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/short-codes.php';
 
-// function paragraph_class_names ($content){
-//   $dom = new DOMDocument();
-//   $dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-//
-//   $xpath = new DOMXPath($dom);
-//   $tags = $xpath->evaluate("//p");
-//
-//   foreach ($tags as $tag) {
-//     $tag->setAttribute("class", "textStyle");
-//   }
-//
-//   $content = $dom->saveHTML();
-//   return $content;
-// }
-// add_filter('the_content', 'paragraph_class_names');
-
-add_action('after_setup_theme', 'remove_admin_bar');
-
 // hide the admin bar, its just fugly as hell
 function remove_admin_bar() {
 	show_admin_bar(false);
 }
+
+add_action('after_setup_theme', 'remove_admin_bar');

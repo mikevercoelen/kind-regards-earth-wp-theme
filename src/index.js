@@ -19,7 +19,7 @@ import RouteScrollTop from 'components/RouteScrollTop/RouteScrollTop'
 import BasicRoute from 'components/BasicRoute/BasicRoute'
 
 import Home from 'pages/Home/Home'
-import Post from 'pages/Post/Post'
+// import Post from 'pages/Post/Post'
 import NotFound from 'pages/NotFound/NotFound'
 import { setFontsLoaded } from 'actions/app'
 import { path } from 'utils/template'
@@ -50,7 +50,7 @@ function renderApp () {
       <Switch>
         <BasicRoute path={path} exact component={Home} />
         <BasicRoute path={`${path}pages/:paged`} component={Home} />
-        <BasicRoute path={`${path}posts/:slug`} component={Post} />
+        {/* <BasicRoute path={`${path}posts/:slug`} component={Post} /> */}
         <Route path='not-found' component={NotFound} />
         <Route path='*' component={NotFound} />
       </Switch>

@@ -23,7 +23,7 @@ const Article = ({ article, isWide, isLatest, minimal }) => {
         [styles.isWide]: isWide,
         [styles.minimal]: minimal
       })}>
-      {(!minimal && article.img && article.img.full.src) && (
+      {(!minimal && article.img && article.img.full && article.img.full.src) && (
         <div
           style={{
             backgroundImage: `url(${article.img.full.src}`
@@ -40,12 +40,18 @@ const Article = ({ article, isWide, isLatest, minimal }) => {
             __html: article.title
           }} />
         <div className={styles.subtitle}>
-          <span className={styles.location}>
-            {article.location}
-          </span>
-          <span className={styles.subtitleSeparator}>
-            &nbsp;―&nbsp;
-          </span>
+          {article.location && [
+            <span
+              key='location'
+              className={styles.location}>
+              {article.location}
+            </span>,
+            <span
+              key='separator'
+              className={styles.subtitleSeparator}>
+              &nbsp;―&nbsp;
+            </span>
+          ]}
           <span className={styles.date}>
             {article.date}
           </span>

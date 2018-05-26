@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware, { END } from 'redux-saga'
 
-import rootReducer from 'reducers'
+import makeRootReducer from 'reducers'
 
 export default function configureStore () {
   const sagaMiddleware = createSagaMiddleware()
@@ -20,7 +20,7 @@ export default function configureStore () {
   }
 
   const store = createStore(
-    rootReducer,
+    makeRootReducer(),
     {},
     compose(
       applyMiddleware(...middleware),
@@ -28,6 +28,8 @@ export default function configureStore () {
     )
   )
 
+  store.asyncReducers = {}
+  store.asyncSagas = {}
   store.sagaMiddleware = createSagaMiddleware
   store.runSaga = sagaMiddleware.run
   store.close = () => store.dispatch(END)

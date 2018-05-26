@@ -52,6 +52,7 @@
 
   .content {
     height: auto;
+    width: auto;
   }
 }
 
@@ -72,6 +73,11 @@
   font-family: $ff-crimson-text;
   font-size: $fs-normal;
   position: relative;
+  width: 510px;
+
+  p {
+    word-wrap: break-word;
+  }
 }
 
 .title {

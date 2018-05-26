@@ -1,49 +1,45 @@
-import _ from 'lodash'
 import moment from 'moment'
 
-export const postToArticle = (post, categories, media) => {
+export const postToArticle = (post) => {
   if (!post) {
     return null
   }
 
-  let category = _.find(categories, c => {
-    return c.id === post.categories[0]
-  })
-
-  const mDate = moment(post.date)
+  const mDate = moment(post.get('date'))
 
   const article = {
-    slug: post.slug,
-    title: post.title.rendered,
-    category,
+    slug: post.get('slug'),
+    title: post.getIn(['title', 'rendered']),
+    category: post.getIn(['categories', 0]),
     date: mDate.format(`do of MMMM 'YY`),
-    description: post.excerpt.rendered,
-    readingTime: post.acf.readingtime,
-    youtubeId: post.acf.youtubeid,
-    location: post.acf.location,
-    content: post.content.rendered,
-    subtitle: post.acf.subtitle
+    description: post.getIn(['excerpt', 'rendered']),
+    readingTime: post.getIn(['acf', 'readingtime']),
+    youtubeId: post.getIn(['acf', 'youtubeid']),
+    location: post.getIn(['acf', 'location']),
+    content: post.getIn(['content', 'rendered']),
+    subtitle: post.getIn(['acf', 'subtitle']),
+    img: {}
   }
 
-  if (post.featured_media !== 0) {
-    const img = _.find(media, m => {
-      return m.id === post.featured_media
-    })
+  const featuredMedia = post.get('featured_media')
 
-    const { medium_large: mediumLarge, full } = img.media_details.sizes
+  if (featuredMedia) {
+    const mediumLarge = featuredMedia.getIn(['media_details', 'sizes', 'medium_large'])
+    const full = featuredMedia.getIn(['media_details', 'sizes', 'full'])
 
-    if (mediumLarge && full) {
-      article.img = {
-        mediumLarge: {
-          width: mediumLarge.width,
-          height: mediumLarge.height,
-          src: mediumLarge.source_url
-        },
-        full: {
-          width: full.width,
-          height: full.height,
-          src: full.source_url
-        }
+    if (mediumLarge) {
+      article.img.mediumLarge = {
+        width: mediumLarge.get('width'),
+        height: mediumLarge.get('height'),
+        src: mediumLarge.get('source_url')
+      }
+    }
+
+    if (full) {
+      article.img.full = {
+        width: full.get('width'),
+        height: full.get('height'),
+        src: full.get('source_url')
       }
     }
   }

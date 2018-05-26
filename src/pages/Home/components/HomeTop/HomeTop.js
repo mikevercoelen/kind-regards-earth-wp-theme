@@ -7,13 +7,13 @@ import ScrollDown from 'components/ScrollDown/ScrollDown'
 import { getAssetPath } from 'utils/template'
 import IconNext from 'components/IconNext/IconNext'
 import { connect } from 'react-redux'
-import { getPosts } from 'selectors/posts'
+import { getLatestPost } from 'selectors/entities'
 import { getPostRoute } from 'utils/routes'
 import { Link } from 'react-router-dom'
+import { Map } from 'immutable'
 
-const HomeTop = ({ posts }) => {
-  const latestPost = posts[0]
-  let latestPostRoute = latestPost ? getPostRoute(latestPost.slug) : '/'
+const HomeTop = ({ latestPost }) => {
+  let latestPostRoute = latestPost ? getPostRoute(latestPost.get('slug')) : '/'
 
   return (
     <div className={styles.component}>
@@ -51,11 +51,11 @@ const HomeTop = ({ posts }) => {
 }
 
 HomeTop.propTypes = {
-  posts: PropTypes.array.isRequired
+  latestPost: PropTypes.instanceOf(Map)
 }
 
 const mapStateToProps = state => ({
-  posts: getPosts(state)
+  latestPost: getLatestPost(state)
 })
 
 export default connect(

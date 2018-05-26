@@ -3,54 +3,38 @@ import PropTypes from 'prop-types'
 import Top from './components/Top/Top'
 import Inner from './components/Inner/Inner'
 import { connect } from 'react-redux'
-import { setPageLoaded } from 'actions/app'
-import { getPostBySlug, getMedia, getCategories, getHasAllPostDataLoaded } from 'selectors/posts'
 import { postLoadBySlug, categoriesLoad, mediaLoad } from 'actions/posts'
 import { postToArticle } from 'utils/formatting'
 
+import {
+  getPostBySlug,
+  getMedia,
+  getCategories
+} from 'selectors/entities'
+
 class Post extends React.Component {
   static propTypes = {
-    setPageLoaded: PropTypes.func,
-    postLoadBySlug: PropTypes.func,
-    post: PropTypes.object,
-    slug: PropTypes.string,
-    categories: PropTypes.array,
-    media: PropTypes.array,
-    categoriesLoad: PropTypes.func.isRequired,
-    mediaLoad: PropTypes.func.isRequired,
-    hasAllPostDataLoaded: PropTypes.bool
-  }
-
-  componentWillReceiveProps (nextProps) {
-    const { hasAllPostDataLoaded, setPageLoaded } = nextProps
-
-    if (hasAllPostDataLoaded) {
-      setPageLoaded(true)
-    }
+    // postLoadBySlug: PropTypes.func,
+    post: PropTypes.object
+    // slug: PropTypes.string
   }
 
   componentDidUpdate () {
-    const { postLoadBySlug, slug } = this.props
-
-    postLoadBySlug(slug)
+    this.loadPost(this.props)
   }
 
   componentWillMount () {
-    const { categoriesLoad, mediaLoad, postLoadBySlug, slug } = this.props
+    this.loadPost(this.props)
+  }
 
-    categoriesLoad()
-    mediaLoad()
+  loadPost = ({ postLoadBySlug, slug }) => {
     postLoadBySlug(slug)
   }
 
   render () {
-    const { hasAllPostDataLoaded, media, categories, post } = this.props
+    const { post } = this.props
 
-    if (!hasAllPostDataLoaded) {
-      return null
-    }
-
-    const article = postToArticle(post, categories, media)
+    const article = postToArticle(post)
 
     if (!article) {
       return null
@@ -72,13 +56,11 @@ const mapStateToProps = (state, ownProps) => {
     slug,
     post: getPostBySlug(slug)(state),
     media: getMedia(state),
-    categories: getCategories(state),
-    hasAllPostDataLoaded: getHasAllPostDataLoaded(state)
+    categories: getCategories(state)
   }
 }
 
 const mapActionsToProps = {
-  setPageLoaded,
   postLoadBySlug,
   categoriesLoad,
   mediaLoad
