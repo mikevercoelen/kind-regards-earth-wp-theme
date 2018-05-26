@@ -1,8 +1,8 @@
-import { Record } from 'immutable'
+import { fromJS } from 'immutable'
 import { createReducer } from 'utils/redux'
 import { SET_FONTS_LOADED, SET_PAGE_LOADED } from 'actions/app'
 
-const initialState = Record({
+const initialState = fromJS({
   hasFontsLoaded: false,
   hasPageLoaded: false
 })
