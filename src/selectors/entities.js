@@ -1,25 +1,13 @@
 import { createSelector } from 'reselect'
-import * as schemas from 'schemas'
+import schemas from 'schemas'
 import { denormalize } from 'normalizr'
+import { Map } from 'immutable'
 
 export const getEntities = state => state.entities
 
 export const getPostsEntities = state => {
   return state.entities.get('posts')
 }
-
-export const getCategories = state => {
-  return state.entities.get('categories')
-}
-
-export const getMedia = state => {
-  return state.entities.get('media')
-}
-
-export const getPostBySlug = slug => createSelector(
-  getPostsEntities,
-  posts => posts.find(post => post.get('slug') === slug)
-)
 
 export const getPostById = id => createSelector(
   getPostsEntities,
@@ -32,6 +20,23 @@ export const getPosts = createSelector(
     return denormalize(
       posts,
       [schemas.post],
+      entities
+    )
+  }
+)
+
+export const getPostBySlug = slug => createSelector(
+  [getPostsEntities, getEntities],
+  (posts, entities) => {
+    const post = posts.find(post => post.get('slug') === slug)
+
+    if (!post) {
+      return Map()
+    }
+
+    return denormalize(
+      post,
+      schemas.post,
       entities
     )
   }

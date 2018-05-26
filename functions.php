@@ -151,8 +151,8 @@ add_filter('rest_prepare_post', function($response, $post, $request) {
   $nextPost = get_adjacent_post( false, '', false );
   $previousPost = get_adjacent_post( false, '', true );
 
-  $response->data['nextPost'] = (is_a($nextPost, 'WP_Post')) ? $nextPost->ID : null;
-  $response->data['previousPost'] = (is_a($previousPost, 'WP_Post')) ? $previousPost->ID : null;
+  $response->data['next'] = (is_a($nextPost, 'WP_Post')) ? $nextPost->ID : null;
+  $response->data['previous'] = (is_a($previousPost, 'WP_Post')) ? $previousPost->ID : null;
 
   return $response;
 }, 10, 3);

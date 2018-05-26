@@ -1,22 +1,21 @@
+/* eslint-disable react/no-unused-prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
 import Top from './components/Top/Top'
 import Inner from './components/Inner/Inner'
 import { connect } from 'react-redux'
-import { postLoadBySlug, categoriesLoad, mediaLoad } from 'actions/posts'
+import { postLoadBySlug } from 'actions/posts'
 import { postToArticle } from 'utils/formatting'
 
 import {
-  getPostBySlug,
-  getMedia,
-  getCategories
+  getPostBySlug
 } from 'selectors/entities'
 
 class Post extends React.Component {
   static propTypes = {
-    // postLoadBySlug: PropTypes.func,
-    post: PropTypes.object
-    // slug: PropTypes.string
+    postLoadBySlug: PropTypes.func,
+    post: PropTypes.object,
+    slug: PropTypes.string
   }
 
   componentDidUpdate () {
@@ -54,16 +53,12 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     slug,
-    post: getPostBySlug(slug)(state),
-    media: getMedia(state),
-    categories: getCategories(state)
+    post: getPostBySlug(slug)(state)
   }
 }
 
 const mapActionsToProps = {
-  postLoadBySlug,
-  categoriesLoad,
-  mediaLoad
+  postLoadBySlug
 }
 
 export default connect(

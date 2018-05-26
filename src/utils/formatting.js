@@ -25,6 +25,17 @@ export const postToArticle = (post) => {
     img: {}
   }
 
+  const next = post.get('next')
+  const previous = post.get('previous')
+
+  if (typeof next === 'object') {
+    article.next = postToArticle(post.get('next'))
+  }
+
+  if (typeof previous === 'object') {
+    article.previous = postToArticle(post.get('previous'))
+  }
+
   const featuredMedia = post.getIn(['_embedded', 'wp:featuredmedia', 0])
 
   if (featuredMedia) {

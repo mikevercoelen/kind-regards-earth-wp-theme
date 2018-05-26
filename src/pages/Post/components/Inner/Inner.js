@@ -57,7 +57,7 @@ export default class Inner extends React.Component {
             className={styles.articleContent} />
           {this.commentsButton}
         </Content>
-        <ContinueReading />
+        <ContinueReading article={article} />
       </div>
     )
   }

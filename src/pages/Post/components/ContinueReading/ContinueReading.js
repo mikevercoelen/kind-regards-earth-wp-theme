@@ -1,36 +1,31 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './ContinueReading.scss'
-import Article from '../../../../components/Article/Article'
+import Article from 'components/Article/Article'
 import IconNextArrow from 'components/IconNextArrow/IconNextArrow'
-import { getNextPost, getPreviousPost, getCategories, getMedia } from 'selectors/posts'
-import { connect } from 'react-redux'
-import { postToArticle } from 'utils/formatting'
 import { getPostRoute } from 'utils/routes'
 import { Link } from 'react-router-dom'
 
-const ContinueReading = ({
-  nextPost,
-  previousPost,
-  categories,
-  media
-}) => {
-  if (!nextPost && !previousPost) {
+const ContinueReading = ({ article }) => {
+  const next = article.next
+  const previous = article.previous
+
+  if (!next && !previous) {
     return null
   }
 
   return (
     <div className={styles.component}>
       <div className={styles.content}>
-        {previousPost && (
+        {previous && (
           <div className={styles.previous}>
             <div className={styles.article}>
               <div className={styles.articleInner}>
                 <Article
-                  article={postToArticle(previousPost, categories, media)}
+                  article={previous}
                   minimal />
               </div>
-              <Link to={getPostRoute(previousPost.slug)} className={`${styles.btnControl} ${styles.btnPrevious}`}>
+              <Link to={getPostRoute(previous.slug)} className={`${styles.btnControl} ${styles.btnPrevious}`}>
                 <IconNextArrow
                   className={styles.btnControlIcon} />
                 <div className={styles.btnControlLabel}>
@@ -40,15 +35,15 @@ const ContinueReading = ({
             </div>
           </div>
         )}
-        {nextPost && (
+        {next && (
           <div className={styles.next}>
             <div className={styles.article}>
               <div className={styles.articleInner}>
                 <Article
-                  article={postToArticle(nextPost, categories, media)}
+                  article={next}
                   minimal />
               </div>
-              <Link to={getPostRoute(nextPost.slug)} className={`${styles.btnControl} ${styles.btnNext}`}>
+              <Link to={getPostRoute(next.slug)} className={`${styles.btnControl} ${styles.btnNext}`}>
                 <div className={styles.btnControlLabel}>
                   Next story
                 </div>
@@ -64,19 +59,7 @@ const ContinueReading = ({
 }
 
 ContinueReading.propTypes = {
-  nextPost: PropTypes.object,
-  previousPost: PropTypes.object,
-  categories: PropTypes.array,
-  media: PropTypes.array
+  article: PropTypes.object
 }
 
-const mapStateToProps = state => ({
-  nextPost: getNextPost(state),
-  previousPost: getPreviousPost(state),
-  categories: getCategories(state),
-  media: getMedia(state)
-})
-
-export default connect(
-  mapStateToProps
-)(ContinueReading)
+export default ContinueReading
