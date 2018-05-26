@@ -1,0 +1,46 @@
+@mixin retina-background($path, $ext: "png") {
+  $at1x_path: "#{$path}.#{$ext}";
+  $at2x_path: "#{$path}@2x.#{$ext}";
+
+  background-image: url("#{$at1x_path}");
+
+  @include media("retina2x") {
+    background-image: url("#{$at2x_path}");
+  }
+}
+
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
+  }
+}
+
+@mixin desktop-only () {
+  @include media('>medium') {
+    @content;
+  }
+}
+
+@mixin small-screen-only () {
+  @include media('<=medium') {
+    @content;
+  }
+}
