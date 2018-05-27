@@ -12,7 +12,7 @@ export const getPostsEntities = state => {
 export const getPosts = createSelector(
   [getPostsEntities, getEntities],
   (posts, entities) => {
-    const nonPrivatePosts = posts.filter(p => p.get('status') === 'private')
+    const nonPrivatePosts = posts.filter(p => p.get('status') !== 'private')
 
     return denormalize(
       nonPrivatePosts,
