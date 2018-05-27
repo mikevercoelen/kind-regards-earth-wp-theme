@@ -164,6 +164,7 @@ add_filter('rest_allow_anonymous_comments', '__return_true');
 require get_template_directory() . '/inc/permalinks.php';
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/short-codes.php';
+require get_template_directory() . '/inc/load-data.php';
 
 // hide the admin bar, its just fugly as hell
 function remove_admin_bar() {

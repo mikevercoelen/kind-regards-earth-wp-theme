@@ -10,6 +10,8 @@ import { ConnectedRouter } from 'react-router-redux'
 import { Route, Switch } from 'react-router-dom'
 import configureStore from 'utils/configureStore'
 import makeRootSaga from 'sagas'
+import { normalize } from 'normalizr'
+import schemas from 'schemas'
 
 import WebFont from 'webfontloader'
 import 'sanitize.css'
@@ -21,7 +23,7 @@ import BasicRoute from 'components/BasicRoute/BasicRoute'
 import Home from 'pages/Home/Home'
 import Post from 'pages/Post/Post'
 import NotFound from 'pages/NotFound/NotFound'
-import { setFontsLoaded } from 'actions/app'
+import { setFontsLoaded, setPreloadData } from 'actions/app'
 import { path } from 'utils/template'
 
 const loadFonts = () => new Promise(resolve => {
@@ -67,7 +69,14 @@ function renderApp () {
   )
 }
 
+function renderPreloadData () {
+  const posts = WPData.data
+  const norm = normalize(posts, [schemas.post])
+  store.dispatch(setPreloadData(norm))
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   loadFonts().then(() => store.dispatch(setFontsLoaded(true)))
   renderApp()
+  renderPreloadData()
 })

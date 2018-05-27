@@ -7,6 +7,9 @@ import 'dropcap.js'
 import IconComments from 'components/IconComments/IconComments'
 import Disqus from 'disqus-react'
 import { DISQUS_SHORT_NAME } from 'config'
+import DocumentMeta from 'react-document-meta'
+import he from 'he'
+import stripTags from 'striptags'
 
 export default class Inner extends React.Component {
   static propTypes = {
@@ -69,8 +72,15 @@ export default class Inner extends React.Component {
   render () {
     const { article } = this.props
 
+    const meta = {
+      title: he.decode(`${article.title} – ${WPSettings.meta.title}`),
+      description: he.decode(stripTags(article.description)),
+      canonical: article.link
+    }
+
     return (
-      <div id='inner' className={styles.component}>
+      <article id='inner' className={styles.component}>
+        <DocumentMeta meta={meta} />
         <Content className={styles.content}>
           <div className={styles.textContent}>
             <div className={styles.date}>
@@ -93,7 +103,7 @@ export default class Inner extends React.Component {
           {this.commentsButton}
         </Content>
         <ContinueReading article={article} />
-      </div>
+      </article>
     )
   }
 }

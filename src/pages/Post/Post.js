@@ -6,6 +6,7 @@ import Inner from './components/Inner/Inner'
 import { connect } from 'react-redux'
 import { postLoadBySlug } from 'actions/posts'
 import { postToArticle } from 'utils/formatting'
+import qs from 'qs'
 
 import {
   getPostBySlug
@@ -15,7 +16,9 @@ class Post extends React.Component {
   static propTypes = {
     postLoadBySlug: PropTypes.func,
     post: PropTypes.object,
-    slug: PropTypes.string
+    slug: PropTypes.string,
+    match: PropTypes.object,
+    previewId: PropTypes.number
   }
 
   componentDidUpdate () {
@@ -26,7 +29,12 @@ class Post extends React.Component {
     this.loadPost(this.props)
   }
 
-  loadPost = ({ postLoadBySlug, slug }) => {
+  loadPost = ({ previewId, postLoadBySlug, slug }) => {
+    // If we have a previewId, we use the preloaded post data
+    if (previewId) {
+      return
+    }
+
     postLoadBySlug(slug)
   }
 
@@ -51,9 +59,13 @@ class Post extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   const slug = ownProps.match.params.slug
 
+  const query = location.search.replace('?', '')
+  const previewId = qs.parse(query).preview_id || null
+
   return {
     slug,
-    post: getPostBySlug(slug)(state)
+    post: getPostBySlug(slug)(state),
+    previewId
   }
 }
 
