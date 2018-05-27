@@ -33,8 +33,6 @@ class HomeContent extends React.Component {
   handleLoadMore = () => {
     const { nextPage } = this.props
 
-    console.log('lol')
-
     this.props.postsLoad({
       page: nextPage
     })

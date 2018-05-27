@@ -2,23 +2,14 @@ import React from 'react'
 import styles from './ArticleTop.scss'
 import ScrollDown from 'components/ScrollDown/ScrollDown'
 import PropTypes from 'prop-types'
-
-const getId = () => {
-  return (+new Date()).toString()
-}
+import YouTube from 'react-youtube'
 
 export default class ArticleTop extends React.Component {
   static propTypes = {
     article: PropTypes.object
   }
 
-  id = null
   player = null
-
-  constructor (props) {
-    super(props)
-    this.id = getId()
-  }
 
   handleClick = () => {
     const { article } = this.props
@@ -37,58 +28,36 @@ export default class ArticleTop extends React.Component {
     }
   }
 
-  componentDidUpdate () {
-    this.initializePlayer(this.props)
-  }
-
-  initializePlayer ({ article }) {
-    const hasYoutubeId = article.youtubeId
-
-    if (!hasYoutubeId) {
-      return
-    }
-
-    setTimeout(() => {
-      this.player = new window.YT.Player(this.id, {
-        videoId: article.youtubeId,
-        playerVars: {
-          rel: 0,
-          controls: 0,
-          showinfo: 0,
-          loop: 1,
-          autoplay: 1,
-          enablejsapi: 1,
-          modestbranding: 1,
-          disablekb: 1,
-          cc_load_policy: 0
-        }
-      })
-    })
-  }
-
-  componentWillUnmount () {
-    if (this.player) {
-      this.player.destroy()
-    }
-  }
-
-  componentDidMount () {
-    this.initializePlayer(this.props)
+  onYTReady = event => {
+    this.player = event.target
   }
 
   get background () {
     const { article } = this.props
 
-    const hasYoutubeId = article.youtubeId
-
-    if (hasYoutubeId) {
+    if (article.youtubeId) {
       return (
         <div
           className={styles.videoContainer}>
           <div className={styles.videoBg}>
-            <div className={styles.videoFg}>
-              <div id={this.id} />
-            </div>
+            <YouTube
+              containerClassName={styles.videoFg}
+              videoId={article.youtubeId}
+              opts={{
+                playerVars: {
+                  rel: 0,
+                  controls: 0,
+                  showinfo: 0,
+                  loop: 1,
+                  autoplay: 1,
+                  enablejsapi: 1,
+                  modestbranding: 1,
+                  disablekb: 1,
+                  cc_load_policy: 0
+                }
+              }}
+              onReady={this.onYTReady}
+            />
           </div>
         </div>
       )
