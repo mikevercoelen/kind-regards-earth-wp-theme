@@ -5,19 +5,39 @@
   margin-top: calc(-15vh - 30px);
   z-index: 80;
   padding-top: 30px;
+
+  @include under-desktop-wide-only() {
+    flex-direction: column;
+    margin-top: 0;
+    padding-top: $space-value;
+  }
 }
 
 .articles {
   padding-top: $space-value * 3;
   padding-bottom: $space-value * 6;
+
+  @include under-desktop-wide-only() {
+    padding: 0 0 $space-value 0;
+  }
 }
 
 .articlesRow {
   margin-top: $space-value * 3;
   display: flex;
 
+  @include under-desktop-wide-only() {
+    flex-direction: column;
+    margin-top: 0;
+  }
+
   .article {
     margin-right: $space-value * 3;
+
+    @include under-desktop-wide-only() {
+      margin-top: $space-value;
+      margin-right: 0;
+    }
   }
 }
 

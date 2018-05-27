@@ -4,6 +4,10 @@
   background-color: $color-super-light;
   display: flex;
   padding: $space-value * 6 0;
+
+  @include small-screen-only () {
+    padding: $space-value * 2 0;
+  }
 }
 
 .content {
@@ -13,9 +17,14 @@
   justify-content: space-between;
   flex-wrap: nowrap;
   flex-direction: row;
-}
+  padding: 0 $space-value;
 
-.article {
+  @include small-screen-only () {
+    margin: 0;
+    display: block;
+    padding: $space-value;
+    flex-direction: column;
+  }
 }
 
 .articleInner {
@@ -23,6 +32,13 @@
   max-width: 380px;
   margin-left: 40px;
   margin-right: 40px;
+
+  @include small-screen-only () {
+    min-height: auto;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .btnControl {
@@ -63,12 +79,27 @@
 .article {
   display: flex;
   flex-direction: column;
+
+  @include small-screen-only () {
+    max-width: 85vw;
+    margin-bottom: $space-value;
+    padding-bottom: $space-value * 4;
+
+    &:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
 }
 
 .btnNext {
   // margin-right: -$space-value * 4;
   margin-left: auto;
   width: 130px;
+
+  @include small-screen-only () {
+    margin-left: initial;
+  }
 
   &:hover {
     .btnControlIcon {

@@ -5,6 +5,7 @@ import Article from 'components/Article/Article'
 import IconNextArrow from 'components/IconNextArrow/IconNextArrow'
 import { getPostRoute } from 'utils/routes'
 import { Link } from 'react-router-dom'
+import cx from 'classnames'
 
 const ContinueReading = ({ article }) => {
   const next = article.next
@@ -18,7 +19,7 @@ const ContinueReading = ({ article }) => {
     <div className={styles.component}>
       <div className={styles.content}>
         {previous && (
-          <div className={styles.article}>
+          <div className={cx(styles.article, styles.next)}>
             <div className={styles.articleInner}>
               <Article
                 article={previous}
@@ -34,7 +35,7 @@ const ContinueReading = ({ article }) => {
           </div>
         )}
         {next && (
-          <div className={styles.article}>
+          <div className={cx(styles.article, styles.previous)}>
             <div className={styles.articleInner}>
               <Article
                 article={next}

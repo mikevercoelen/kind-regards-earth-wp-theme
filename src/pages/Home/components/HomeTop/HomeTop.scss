@@ -15,6 +15,10 @@ $height: 120vh;
   font-size: $fs-leading;
   text-align: center;
 
+  @include small-screen-only () {
+    font-size: $fs-leading-small-screen;
+  }
+
   a {
     text-decoration: underline;
     cursor: pointer;

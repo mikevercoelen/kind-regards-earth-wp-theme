@@ -39,6 +39,12 @@
   }
 }
 
+@mixin under-desktop-wide-only () {
+  @include media('<=desktop-wide') {
+    @content;
+  }
+}
+
 @mixin small-screen-only () {
   @include media('<=medium') {
     @content;

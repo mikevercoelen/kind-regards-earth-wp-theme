@@ -25,6 +25,7 @@ $breakpoints: (
   phone: 320px,
   tablet: 768px,
   desktop: 1024px,
+  desktop-wide: 1180px,
   medium: 768px,
   small: 500px
 );
@@ -42,7 +43,10 @@ $fs-normal: 18px;
 $fs-small: 16px;
 $fs-sub-text: 11px;
 $fs-leading: 64px;
+$fs-leading-small-screen: 64px * 0.8;
 $fs-heading: 36px;
+$fs-heading-small-screen: 36px * 0.8;
 $fs-copy: 27px;
+$fs-copy-small-screen: 27px * 0.8;
 
 $fs-body: 14px;

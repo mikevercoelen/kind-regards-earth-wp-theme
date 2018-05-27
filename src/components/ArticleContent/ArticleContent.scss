@@ -12,6 +12,15 @@
   .alignright {
     text-align: right;
   }
+
+  .wp-caption img {
+    border: 0 none;
+    height: auto;
+    margin: 0;
+    max-width: 98.5%;
+    padding: 0;
+    width: auto;
+  }
 }
 
 .component {
@@ -20,6 +29,10 @@
   padding-top: $space-value * 6;
   background-color: white;
   font-size: $fs-copy;
+
+  @include small-screen-only () {
+    font-size: $fs-copy-small-screen;
+  }
 }
 
 .content {
@@ -70,6 +83,10 @@
       display: block;
       width: 10px;
       background-color: $color-primary;
+
+      @include small-screen-only () {
+        width: 20px;
+      }
     }
 
     p {
@@ -81,12 +98,20 @@
       font-family: $ff-crimson-text;
       font-size: $fs-heading;
       font-weight: 700;
+
+      @include small-screen-only () {
+        font-size: $fs-heading-small-screen;
+      }
     }
   }
 
   figure {
     padding: $space-value * 4 0;
     width: auto !important;
+
+    @include small-screen-only () {
+      padding: 0;
+    }
 
     img {
       display: inline-block;
@@ -116,6 +141,10 @@
   margin: 0;
   padding-top: $space-value * 2;
   padding-bottom: $space-value * 2;
+
+  @include small-screen-only () {
+    font-size: $fs-leading-small-screen;
+  }
 }
 
 .subtitle {
@@ -125,6 +154,10 @@
   font-size: $fs-heading;
   font-weight: normal;
   padding-bottom: $space-value * 2;
+
+  @include small-screen-only () {
+    font-size: $fs-heading-small-screen;
+  }
 }
 
 .comments {

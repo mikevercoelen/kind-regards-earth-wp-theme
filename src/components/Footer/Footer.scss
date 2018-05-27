@@ -9,10 +9,13 @@
   display: flex;
   align-items: center;
   height: 100%;
+  padding: 0 $space-value;
 }
 
 .logo {
-
+  @include small-screen-only() {
+    margin-left: $space-value * 4;
+  }
 }
 
 .nav {
@@ -21,6 +24,10 @@
   font-family: $ff-libre-b;
   font-size: $fs-normal;
   color: $color-sub-text;
+
+  @include small-screen-only() {
+    display: none;
+  }
 }
 
 .navLink {
