@@ -1,5 +1,19 @@
 @import 'base.scss';
 
+:global {
+  .aligncenter {
+    text-align: center;
+  }
+
+  .alignleft {
+    text-align: left;
+  }
+
+  .alignright {
+    text-align: right;
+  }
+}
+
 .component {
   font-family: $ff-crimson-text;
   color: $color-text-dark;
@@ -73,10 +87,6 @@
   figure {
     padding: $space-value * 4 0;
     width: auto !important;
-
-    :global(.aligncenter) {
-      text-align: center;
-    }
 
     img {
       display: inline-block;
