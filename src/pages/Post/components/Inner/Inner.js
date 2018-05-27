@@ -34,7 +34,7 @@ export default class Inner extends React.Component {
 
     const disqusConfig = {
       url: article.link,
-      identifier: article.id,
+      identifier: article.slug,
       title: article.title
     }
 
@@ -57,7 +57,7 @@ export default class Inner extends React.Component {
           <div className={styles.btnCommentsLabel}>
             <span
               className='disqus-comment-count'
-              data-disqus-identifier='your_disqus_identifier' />
+              data-disqus-identifier={disqusConfig.identifier} />
           </div>
         </button>
       </div>
