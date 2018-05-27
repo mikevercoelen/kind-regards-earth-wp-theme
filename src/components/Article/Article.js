@@ -25,10 +25,10 @@ const Article = ({ article, isWide, isLatest, minimal }) => {
         [styles.isWide]: isWide,
         [styles.minimal]: minimal
       })}>
-      {(!minimal && article.img && article.img.full && article.img.full.src) && (
+      {(!minimal && article.img && article.img.mediumLarge && article.img.mediumLarge.src) && (
         <div
           style={{
-            backgroundImage: `url(${article.img.full.src}`
+            backgroundImage: `url(${article.img.mediumLarge.src}`
           }}
           className={styles.articleImg} />
       )}

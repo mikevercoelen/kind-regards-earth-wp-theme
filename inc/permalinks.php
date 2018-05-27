@@ -86,7 +86,7 @@ class Kre_SetPermalinks {
 	 */
 	public function change_page() {
 		global $wp_rewrite;
-		$wp_rewrite->page_structure = '/page/%pagename%';
+		$wp_rewrite->page_structure = '/pages/%pagename%';
 	}
 	/**
 	 * Create an `attachment/ID` rule so that our custom route isn't automatically 404'd
