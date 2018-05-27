@@ -73,7 +73,7 @@
     }
 
     p {
-      max-width: auto !important;
+      max-width: none !important;
       margin: 0;
       padding: $space-value * 2 0;
       margin-left: $space-value * 2;
@@ -165,4 +165,8 @@
   width: 110px;
   border-bottom: 2px dotted $color-dominant;
   line-height: 1.7;
+}
+
+.topSpace {
+  padding-top: $space-value * 12;
 }

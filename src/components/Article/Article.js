@@ -5,6 +5,7 @@ import cx from 'classnames'
 import Button from 'components/Button/Button'
 import IconNext from 'components/IconNext/IconNext'
 import { Link } from 'react-router-dom'
+import { getPostRoute } from 'utils/routes'
 
 const Article = ({ article, isWide, isLatest, minimal }) => {
   if (!article) {
@@ -69,7 +70,7 @@ const Article = ({ article, isWide, isLatest, minimal }) => {
           </div>
         )}
         {!minimal && (
-          <Link to={`/posts/${article.slug}`}>
+          <Link to={getPostRoute(article.slug)}>
             <Button
               alt
               className={styles.btnReadMore}>

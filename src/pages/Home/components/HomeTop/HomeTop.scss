@@ -19,6 +19,7 @@ $height: 120vh;
     text-decoration: underline;
     cursor: pointer;
     transition: color 250ms ease;
+    color: inherit;
 
     &:hover {
       color: $color-dominant;

@@ -7,6 +7,10 @@ import {
 } from 'actions/posts'
 
 import {
+  PAGE_LOAD_BY_SLUG_REQUEST
+} from 'actions/pages'
+
+import {
   SET_PRELOAD_DATA
 } from '../actions/app'
 
@@ -31,5 +35,9 @@ export default createReducer(initialState, {
     })
   },
   [POST_LOAD_BY_SLUG_REQUEST.SUCCESS]: mergeEntities,
-  [SET_PRELOAD_DATA]: mergeEntities
+  [PAGE_LOAD_BY_SLUG_REQUEST.SUCCESS]: mergeEntities,
+  [SET_PRELOAD_DATA]: (state, { payload: { posts, pages } }) => {
+    const withPosts = mergeEntities(state, { payload: posts })
+    return mergeEntities(withPosts, { payload: pages })
+  }
 })

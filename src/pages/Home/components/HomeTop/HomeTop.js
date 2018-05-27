@@ -8,7 +8,7 @@ import { getAssetPath } from 'utils/template'
 import IconNext from 'components/IconNext/IconNext'
 import { connect } from 'react-redux'
 import { getLatestPost } from 'selectors/entities'
-import { getPostRoute } from 'utils/routes'
+import { getPostRoute, getPageRoute } from 'utils/routes'
 import { Link } from 'react-router-dom'
 import { Map } from 'immutable'
 
@@ -33,7 +33,7 @@ const HomeTop = ({ latestPost }) => {
       <div className={styles.topContent}>
         <Content className={styles.content}>
           <h1 className={styles.headline}>
-            <em>Memoirs</em> of <a>my</a> <em>expedition</em> around the <em>planet</em>
+            <em>Memoirs</em> of <Link to={getPageRoute('about')}>my</Link> <em>expedition</em> around the <em>planet</em>
           </h1>
           <Link to={latestPostRoute}>
             <Button className={styles.btnReadLatest}>

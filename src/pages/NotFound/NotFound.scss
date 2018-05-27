@@ -16,7 +16,6 @@
 }
 
 .bgImg {
-  @include retina-background('./404', 'png');
   width: 692px;
   height: 270px;
   background-size: 692px 270px;

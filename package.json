@@ -11,9 +11,9 @@
     "zip": "npm run build && node ./tools/zipTheme.js",
     "start": "npm run clean && NODE_ENV=development webpack --watch --config ./tools/config/webpackConfig.js",
     "build": "npm run clean && NODE_ENV=production webpack --config ./tools/config/webpackConfig.js",
-    "dev": "npm run watch",
+    "dev": "npm run start",
     "prepush": "npm run build",
-    "quick-build": "npm run build && git add . && git commit -a -m \"New build\" --no-verify && git push --no-verify"
+    "quick-deploy": "npm run build && git add . && git commit -a -m \"New build\" --no-verify && git push --no-verify"
   },
   "browserslist": [
     "> 1%",
@@ -97,10 +97,10 @@
     "normalizr": "^3.2.4",
     "prop-types": "^15.6.1",
     "qs": "^6.5.2",
-    "react": "^16.3.2",
+    "react": "^16.4.0",
     "react-body-classname": "^1.2.0",
     "react-document-meta": "^3.0.0-beta.2",
-    "react-dom": "^16.3.2",
+    "react-dom": "^16.4.0",
     "react-headroom": "^2.2.2",
     "react-redux": "^5.0.7",
     "react-router": "4.2.0",

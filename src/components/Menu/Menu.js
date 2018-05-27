@@ -6,13 +6,14 @@ import Blanket from '../Blanket/Blanket'
 import FadeDown from '../Transitions/FadeDown/FadeDown'
 import cx from 'classnames'
 import { Link } from 'react-router-dom'
+import { getPageRoute } from 'utils/routes'
 
 const menuItems = [{
   label: 'Home',
   to: '/'
 }, {
   label: 'About',
-  to: '/about'
+  to: getPageRoute('about')
 }]
 
 const bodyElement = document.body

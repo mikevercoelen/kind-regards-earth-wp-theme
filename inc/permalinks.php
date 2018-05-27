@@ -3,36 +3,32 @@
  * Update permalinks for correct JS-based routing
  *
  */
-/**
- * Class wrapper for permalink actions
- */
+
 class Kre_SetPermalinks {
-	/**
-	 * Set up actions
-	 */
+
 	public function __construct() {
-		add_action( 'admin_notices', array( $this, 'admin_permalinks_warning' ) );
-		add_action( 'init', array( $this, 'change_date' ) );
-		add_action( 'init', array( $this, 'change_paged' ) );
-		add_action( 'init', array( $this, 'change_page' ) );
-		add_action( 'init', array( $this, 'add_new_attachment' ) );
-		add_action( 'after_switch_theme', array( $this, 'update_permalinks' ), 11 );
-		add_action( 'template_redirect', array( $this, 'do_redirects' ) );
-		add_action( 'admin_head-options-permalink.php', array( $this, 'add_contextual_permalink_help' ) );
+		add_action('admin_notices', array( $this, 'admin_permalinks_warning'));
+		add_action('init', array( $this, 'change_date'));
+		add_action('init', array( $this, 'change_paged'));
+		add_action('init', array( $this, 'change_page'));
+		add_action('init', array( $this, 'add_new_attachment'));
+		add_action('after_switch_theme', array( $this, 'update_permalinks' ), 11);
+		add_action('template_redirect', array( $this, 'do_redirects'));
+		add_action('admin_head-options-permalink.php', array( $this, 'add_contextual_permalink_help'));
 		// Flush permalinks after the theme is activated.
-		add_action( 'after_switch_theme', 'flush_rewrite_rules' );
+		add_action('after_switch_theme', 'flush_rewrite_rules' );
 	}
 	/**
 	 * Add a warning message to the permalinks screen.
 	 */
 	public function admin_permalinks_warning() {
 		$current_screen = get_current_screen();
-		if ( 'options-permalink' !== $current_screen->id ) {
+		if ('options-permalink' !== $current_screen->id) {
 			return;
 		}
 		?>
 		<div class="notice notice-warning">
-			<p><?php _e( '<b>Warning:</b> The theme you\'re using does not support customized permalinks. See the Help tab above for more information.', 'kre' ); ?></p>
+			<p><?php _e('<b>Warning:</b> The theme you\'re using does not support customized permalinks. See the Help tab above for more information.', 'kre'); ?></p>
 		</div>
 		<?php
 	}
@@ -42,7 +38,7 @@ class Kre_SetPermalinks {
 	public function admin_theme_warning() {
 		?>
 		<div class="notice notice-warning">
-			<p><?php _e( 'This theme requires special URLs to display your content, so your permalinks have been updated. To undo this, switch to another theme.', 'kre' ); ?></p>
+			<p><?php _e('This theme requires special URLs to display your content, so your permalinks have been updated. To undo this, switch to another theme.', 'kre'); ?></p>
 		</div>
 		<?php
 	}
@@ -68,7 +64,7 @@ class Kre_SetPermalinks {
 	 */
 	public function update_permalinks() {
 		global $wp_rewrite;
-		$wp_rewrite->set_permalink_structure( '/%year%/%monthnum%/%postname%/' );
+		$wp_rewrite->set_permalink_structure( '/post/%postname%/' );
 		add_action( 'admin_notices', array( $this, 'admin_theme_warning' ) );
 	}
 	/**

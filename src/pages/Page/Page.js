@@ -3,20 +3,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ArticleTop from 'components/ArticleTop/ArticleTop'
 import ArticleContent from 'components/ArticleContent/ArticleContent'
-import ContinueReading from './components/ContinueReading/ContinueReading'
 import { connect } from 'react-redux'
-import { postLoadBySlug } from 'actions/posts'
-import { postToArticle } from 'utils/formatting'
+import { pageLoadBySlug } from 'actions/pages'
+import { pageToArticle } from 'utils/formatting'
 import qs from 'qs'
+import { getPageBySlug } from 'selectors/entities'
+import styles from './Page.scss'
 
-import {
-  getPostBySlug
-} from 'selectors/entities'
-
-class Post extends React.Component {
+class Page extends React.Component {
   static propTypes = {
-    postLoadBySlug: PropTypes.func,
-    post: PropTypes.object,
+    pageLoadBySlug: PropTypes.func,
+    page: PropTypes.object,
     slug: PropTypes.string,
     match: PropTypes.object,
     previewId: PropTypes.string
@@ -30,19 +27,18 @@ class Post extends React.Component {
     this.loadPost(this.props)
   }
 
-  loadPost = ({ previewId, postLoadBySlug, slug }) => {
-    // If we have a previewId, we use the preloaded post data
+  loadPost = ({ previewId, pageLoadBySlug, slug }) => {
+    // If we have a previewId, we use the preloaded page data
     if (previewId) {
       return
     }
 
-    postLoadBySlug(slug)
+    pageLoadBySlug(slug)
   }
 
   render () {
-    const { post } = this.props
-
-    const article = postToArticle(post)
+    const { page } = this.props
+    const article = pageToArticle(page)
 
     if (!article) {
       return null
@@ -53,11 +49,10 @@ class Post extends React.Component {
         key='top'
         article={article} />,
       <ArticleContent
+        noComments={!article.hasComments}
         key='content'
         article={article} />,
-      <ContinueReading
-        key='continue-reading'
-        article={article} />
+      <div className={styles.footerBorder} />
     ]
   }
 }
@@ -70,16 +65,16 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     slug,
-    post: getPostBySlug(slug)(state),
+    page: getPageBySlug(slug)(state),
     previewId
   }
 }
 
 const mapActionsToProps = {
-  postLoadBySlug
+  pageLoadBySlug
 }
 
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(Post)
+)(Page)

@@ -3,13 +3,14 @@ import styles from './Footer.scss'
 import Content from '../Content/Content'
 import { Link, NavLink } from 'react-router-dom'
 import { getAssetPath } from 'utils/template'
+import { getPageRoute } from 'utils/routes'
 
 const links = [{
   label: 'Home',
   to: '/'
 }, {
   label: 'About',
-  to: '/about'
+  to: getPageRoute('about')
 }]
 
 const Footer = () => (

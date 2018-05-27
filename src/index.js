@@ -22,6 +22,7 @@ import BasicRoute from 'components/BasicRoute/BasicRoute'
 
 import Home from 'pages/Home/Home'
 import Post from 'pages/Post/Post'
+import Page from 'pages/Page/Page'
 import NotFound from 'pages/NotFound/NotFound'
 import { setFontsLoaded, setPreloadData } from 'actions/app'
 import { path } from 'utils/template'
@@ -52,7 +53,8 @@ function renderApp () {
       <Switch>
         <BasicRoute path={path} exact component={Home} />
         <BasicRoute path={`${path}pages/:paged`} component={Home} />
-        <BasicRoute path={`${path}posts/:slug`} component={Post} />
+        <BasicRoute path={`${path}post/:slug`} component={Post} />
+        <BasicRoute path={`${path}page/:slug`} component={Page} />
         <Route path='not-found' component={NotFound} />
         <Route path='*' component={NotFound} />
       </Switch>
@@ -70,9 +72,21 @@ function renderApp () {
 }
 
 function renderPreloadData () {
-  const posts = WPData.data
-  const norm = normalize(posts, [schemas.post])
-  store.dispatch(setPreloadData(norm))
+  const data = WPData.data
+  const pages = data.filter(entry => entry.type === 'page')
+  const posts = data.filter(entry => entry.type === 'post')
+
+  const payload = {}
+
+  if (pages) {
+    payload.pages = normalize(pages, [schemas.page])
+  }
+
+  if (posts) {
+    payload.posts = normalize(posts, [schemas.post])
+  }
+
+  store.dispatch(setPreloadData(payload))
 }
 
 document.addEventListener('DOMContentLoaded', () => {

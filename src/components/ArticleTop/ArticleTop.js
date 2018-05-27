@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Top.scss'
+import styles from './ArticleTop.scss'
 import ScrollDown from 'components/ScrollDown/ScrollDown'
 import PropTypes from 'prop-types'
 
@@ -7,7 +7,7 @@ const getId = () => {
   return (+new Date()).toString()
 }
 
-export default class Top extends React.Component {
+export default class ArticleTop extends React.Component {
   static propTypes = {
     article: PropTypes.object
   }
@@ -60,7 +60,9 @@ export default class Top extends React.Component {
   }
 
   componentWillUnmount () {
-    this.player.destroy()
+    if (this.player) {
+      this.player.destroy()
+    }
   }
 
   componentDidMount () {

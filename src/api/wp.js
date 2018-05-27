@@ -23,8 +23,14 @@ const getPostById = id => wp
   .id(id)
   .embed()
 
+const getPageBySlug = slug => wp
+  .pages()
+  .slug(slug)
+  .embed()
+
 export default {
   getPosts,
   getPostBySlug,
-  getPostById
+  getPostById,
+  getPageBySlug
 }
