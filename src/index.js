@@ -72,6 +72,9 @@ function renderApp () {
 function renderPreloadData () {
   const posts = WPData.data
   const norm = normalize(posts, [schemas.post])
+
+  console.log(norm)
+
   store.dispatch(setPreloadData(norm))
 }
 
