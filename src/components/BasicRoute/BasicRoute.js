@@ -6,15 +6,19 @@ import PageLoader from 'components/PageLoader/PageLoader'
 import Header from 'components/Header/Header'
 import Footer from 'components/Footer/Footer'
 import ToTop from 'components/ToTop/ToTop'
+import { getIsLoaded } from 'selectors/app'
+import { connect } from 'react-redux'
 
-export default class BasicRoute extends React.Component {
+class BasicRoute extends React.Component {
   static propTypes = {
-    component: PropTypes.func
+    component: PropTypes.func,
+    isLoaded: PropTypes.bool.isRequired
   }
 
   render () {
     const {
       component: Component,
+      isLoaded,
       ...rest
     } = this.props
 
@@ -22,7 +26,7 @@ export default class BasicRoute extends React.Component {
       <Route {...rest} render={matchProps => [
         <PageLoader
           key='page-loader'
-          isVisible={false} />,
+          isVisible={!isLoaded} />,
         <Header key='header' />,
         <Component
           key='content'
@@ -33,3 +37,11 @@ export default class BasicRoute extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  isLoaded: getIsLoaded(state)
+})
+
+export default connect(
+  mapStateToProps
+)(BasicRoute)

@@ -8,14 +8,13 @@ import { connect } from 'react-redux'
 import { postLoadBySlug } from 'actions/posts'
 import { postToArticle } from 'utils/formatting'
 import qs from 'qs'
-
-import {
-  getPostBySlug
-} from 'selectors/entities'
+import { setPageLoaded } from 'actions/app'
+import { getPostBySlug } from 'selectors/entities'
 
 class Post extends React.Component {
   static propTypes = {
     postLoadBySlug: PropTypes.func,
+    setPageLoaded: PropTypes.func,
     post: PropTypes.object,
     slug: PropTypes.string,
     match: PropTypes.object,
@@ -37,6 +36,10 @@ class Post extends React.Component {
     }
 
     postLoadBySlug(slug)
+  }
+
+  componentDidMount () {
+    this.props.setPageLoaded(true)
   }
 
   render () {
@@ -76,7 +79,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapActionsToProps = {
-  postLoadBySlug
+  postLoadBySlug,
+  setPageLoaded
 }
 
 export default connect(

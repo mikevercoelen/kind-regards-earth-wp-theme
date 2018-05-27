@@ -9,10 +9,12 @@ import { pageToArticle } from 'utils/formatting'
 import qs from 'qs'
 import { getPageBySlug } from 'selectors/entities'
 import styles from './Page.scss'
+import { setPageLoaded } from 'actions/app'
 
 class Page extends React.Component {
   static propTypes = {
     pageLoadBySlug: PropTypes.func,
+    setPageLoaded: PropTypes.func,
     page: PropTypes.object,
     slug: PropTypes.string,
     match: PropTypes.object,
@@ -34,6 +36,10 @@ class Page extends React.Component {
     }
 
     pageLoadBySlug(slug)
+  }
+
+  componentDidMount () {
+    this.props.setPageLoaded(true)
   }
 
   render () {
@@ -72,7 +78,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapActionsToProps = {
-  pageLoadBySlug
+  pageLoadBySlug,
+  setPageLoaded
 }
 
 export default connect(

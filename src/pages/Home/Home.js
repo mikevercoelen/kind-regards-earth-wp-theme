@@ -5,16 +5,33 @@ import HomeContent from './components/HomeContent/HomeContent'
 import Page from 'components/Page/Page'
 import { connect } from 'react-redux'
 import { postsLoad } from 'actions/posts'
+import { setPageLoaded } from 'actions/app'
+
+const loadVideo = () => new Promise(resolve => {
+  const readyChecker = setInterval(() => {
+    const videoBgElement = document.getElementById('video-bg')
+
+    if (videoBgElement && videoBgElement.readyState >= 3) {
+      resolve()
+      clearInterval(readyChecker)
+    }
+  }, 300)
+})
 
 class Home extends React.Component {
   static propTypes = {
-    postsLoad: PropTypes.func.isRequired
+    postsLoad: PropTypes.func.isRequired,
+    setPageLoaded: PropTypes.func
   }
 
   componentWillMount () {
     this.props.postsLoad({
       page: 1
     })
+  }
+
+  componentDidMount () {
+    loadVideo().then(() => this.props.setPageLoaded(true))
   }
 
   render () {
@@ -28,7 +45,8 @@ class Home extends React.Component {
 }
 
 const mapActionsToProps = {
-  postsLoad
+  postsLoad,
+  setPageLoaded
 }
 
 export default connect(

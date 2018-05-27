@@ -4,7 +4,7 @@ import { SET_FONTS_LOADED, SET_PAGE_LOADED } from 'actions/app'
 
 const initialState = fromJS({
   hasFontsLoaded: false,
-  hasPageLoaded: true
+  hasPageLoaded: false
 })
 
 export default createReducer(initialState, {
