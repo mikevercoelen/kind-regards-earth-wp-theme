@@ -2,6 +2,7 @@ import { createSelector } from 'reselect'
 import schemas from 'schemas'
 import { denormalize } from 'normalizr'
 import { Map } from 'immutable'
+import _ from 'lodash'
 
 export const getEntities = state => state.entities
 
@@ -9,16 +10,13 @@ export const getPostsEntities = state => {
   return state.entities.get('posts')
 }
 
-export const getPostById = id => createSelector(
-  getPostsEntities,
-  posts => posts.find(post => post.get('id') === id)
-)
-
 export const getPosts = createSelector(
   [getPostsEntities, getEntities],
   (posts, entities) => {
+    const nonPrivatePosts = _.filter(p => p.get('status') === 'private')
+
     return denormalize(
-      posts,
+      nonPrivatePosts,
       [schemas.post],
       entities
     )
