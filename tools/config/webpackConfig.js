@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const LodashPlugin = require('lodash-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const paths = require('../utils/paths')
 const env = require('../utils/env')
@@ -129,8 +130,15 @@ let plugins = [
   })
 ]
 
-if (env.isProd) {
-  plugins.push(new OptimizeCSSAssetsPlugin({}))
+const optimization = {
+  minimizer: [
+    new UglifyJsPlugin({
+      cache: true,
+      parallel: true,
+      sourceMap: true // set to true if you want JS source maps
+    }),
+    new OptimizeCSSAssetsPlugin({})
+  ]
 }
 
 const webpackConfig = {
@@ -142,6 +150,7 @@ const webpackConfig = {
     path: paths.buildPath,
     filename: '[name].js'
   },
+  optimization,
   plugins,
   resolve: {
     modules: [
