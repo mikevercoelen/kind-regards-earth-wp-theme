@@ -55,9 +55,11 @@ export default class Inner extends React.Component {
           className={styles.btnComments}>
           <IconComments className={styles.btnCommentsIcon} />
           <div className={styles.btnCommentsLabel}>
-            <span
-              className='disqus-comment-count'
-              data-disqus-identifier={disqusConfig.identifier} />
+            <Disqus.CommentCount
+              shortname={DISQUS_SHORT_NAME}
+              config={disqusConfig}>
+              comments
+            </Disqus.CommentCount>
           </div>
         </button>
       </div>
