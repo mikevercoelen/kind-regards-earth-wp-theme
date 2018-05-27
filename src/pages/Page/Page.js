@@ -49,6 +49,7 @@ class Page extends React.Component {
         key='top'
         article={article} />,
       <ArticleContent
+        hideDate
         noComments={!article.hasComments}
         key='content'
         article={article} />,

@@ -21,7 +21,14 @@ export default class ArticleTop extends React.Component {
   }
 
   handleClick = () => {
-    const isPlaying = this.player.getPlayerState() === 1
+    const { article } = this.props
+    const hasYoutubeId = article.youtubeId
+
+    if (!hasYoutubeId) {
+      return
+    }
+
+    const isPlaying = this.player && this.player.getPlayerState() === 1
 
     if (isPlaying) {
       this.player.pauseVideo()
@@ -77,7 +84,6 @@ export default class ArticleTop extends React.Component {
     if (hasYoutubeId) {
       return (
         <div
-          onClick={this.handleClick}
           className={styles.videoContainer}>
           <div className={styles.videoBg}>
             <div className={styles.videoFg}>
@@ -105,7 +111,9 @@ export default class ArticleTop extends React.Component {
 
   render () {
     return (
-      <div className={styles.component}>
+      <div
+        onClick={this.handleClick}
+        className={styles.component}>
         {this.background}
         <ScrollDown
           label='Start reading'

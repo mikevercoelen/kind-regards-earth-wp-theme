@@ -10,12 +10,14 @@ import DocumentMeta from 'react-document-meta'
 import he from 'he'
 import stripTags from 'striptags'
 import cx from 'classnames'
+import Helmet from 'react-helmet'
 
 export default class ArticleContent extends React.Component {
   static propTypes = {
     article: PropTypes.object,
     noComments: PropTypes.bool,
-    topSpace: PropTypes.bool
+    topSpace: PropTypes.bool,
+    hideDate: PropTypes.bool
   }
 
   state = {
@@ -76,7 +78,7 @@ export default class ArticleContent extends React.Component {
   }
 
   render () {
-    const { article, topSpace } = this.props
+    const { article, topSpace, hideDate } = this.props
 
     const meta = {
       title: he.decode(`${article.title} – ${WPSettings.meta.title}`),
@@ -91,11 +93,18 @@ export default class ArticleContent extends React.Component {
           [styles.topSpace]: topSpace
         })}>
         <DocumentMeta meta={meta} />
+        <Helmet>
+          <title>
+            {meta.title}
+          </title>
+        </Helmet>
         <Content className={styles.content}>
           <div className={styles.textContent}>
-            <div className={styles.date}>
-              {article.date}
-            </div>
+            {!hideDate && (
+              <div className={styles.date}>
+                {article.date}
+              </div>
+            )}
             <h1 className={styles.title}>
               {article.title}
             </h1>
