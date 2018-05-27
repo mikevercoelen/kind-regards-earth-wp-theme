@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const LodashPlugin = require('lodash-webpack-plugin')
 const autoprefixer = require('autoprefixer')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const paths = require('../utils/paths')
 const env = require('../utils/env')
@@ -127,6 +128,10 @@ let plugins = [
     chunkFilename: '[id].css'
   })
 ]
+
+if (env.isProd) {
+  plugins.push(new OptimizeCSSAssetsPlugin({}))
+}
 
 const webpackConfig = {
   mode: env.isDev ? 'development' : 'production',
