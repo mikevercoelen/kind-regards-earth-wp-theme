@@ -12,7 +12,8 @@
     "start": "npm run clean && NODE_ENV=development webpack --watch --config ./tools/config/webpackConfig.js",
     "build": "npm run clean && NODE_ENV=production webpack --config ./tools/config/webpackConfig.js",
     "dev": "npm run watch",
-    "prepush": "npm run build"
+    "prepush": "npm run build",
+    "quick-build": "npm run build && git add . && git commit -a -m \"New build\" --no-verify && git push --no-verify"
   },
   "browserslist": [
     "> 1%",
