@@ -106,6 +106,12 @@
   padding-bottom: $space-value * 2;
 }
 
+.comments {
+  padding-top: $space-value * 6;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
 .btnCommentsWrap {
   display: flex;
   justify-content: center;

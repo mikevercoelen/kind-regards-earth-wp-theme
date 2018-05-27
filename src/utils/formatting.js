@@ -13,7 +13,9 @@ export const postToArticle = (post) => {
   const article = {
     author,
     categories,
+    id: post.get('id'),
     slug: post.get('slug'),
+    link: post.get('link'),
     title: post.getIn(['title', 'rendered']),
     date: mDate.format(`do of MMMM 'YY`),
     description: post.getIn(['excerpt', 'rendered']),

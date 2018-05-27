@@ -83,6 +83,7 @@
     "babel-polyfill": "^6.26.0",
     "blanket-animation": "^1.2.1",
     "classnames": "^2.2.5",
+    "disqus-react": "^1.0.5",
     "dropcap.js": "^1.0.1",
     "history": "^4.7.2",
     "immutable": "^3.8.2",

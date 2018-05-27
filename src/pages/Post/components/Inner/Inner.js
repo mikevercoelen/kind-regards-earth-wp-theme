@@ -4,11 +4,16 @@ import styles from './Inner.scss'
 import Content from 'components/Content/Content'
 import ContinueReading from '../ContinueReading/ContinueReading'
 import 'dropcap.js'
-// import IconComments from 'components/IconComments/IconComments'
+import IconComments from 'components/IconComments/IconComments'
+import Disqus from 'disqus-react'
 
 export default class Inner extends React.Component {
   static propTypes = {
     article: PropTypes.object
+  }
+
+  state = {
+    showComments: false
   }
 
   componentDidMount () {
@@ -16,19 +21,50 @@ export default class Inner extends React.Component {
     window.Dropcap.layout(dropcaps, 4)
   }
 
-  get commentsButton () {
-    return null
+  showComments = () => {
+    this.setState({
+      showComments: true
+    })
+  }
 
-    // return (
-    //   <div className={styles.btnCommentsWrap}>
-    //     <button className={styles.btnComments}>
-    //       <IconComments className={styles.btnCommentsIcon} />
-    //       <div className={styles.btnCommentsLabel}>
-    //         13 comments
-    //       </div>
-    //     </button>
-    //   </div>
-    // )
+  get commentsButton () {
+    const { showComments } = this.state
+    const { article } = this.props
+
+    const disqusConfig = {
+      url: article.link,
+      identifier: article.id,
+      title: article.title
+    }
+
+    const disqusShortname = 'kind-regards-earth'
+
+    if (showComments) {
+      return (
+        <div className={styles.comments}>
+          <Disqus.DiscussionEmbed
+            shortname={disqusShortname}
+            config={disqusConfig} />
+        </div>
+      )
+    }
+
+    return (
+      <div className={styles.btnCommentsWrap}>
+        <button
+          onClick={this.showComments}
+          className={styles.btnComments}>
+          <IconComments className={styles.btnCommentsIcon} />
+          <div className={styles.btnCommentsLabel}>
+            <Disqus.CommentCount
+              shortname={disqusShortname}
+              config={disqusConfig}>
+              comments
+            </Disqus.CommentCount>
+          </div>
+        </button>
+      </div>
+    )
   }
 
   render () {
