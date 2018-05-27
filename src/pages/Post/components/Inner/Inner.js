@@ -6,6 +6,7 @@ import ContinueReading from '../ContinueReading/ContinueReading'
 import 'dropcap.js'
 import IconComments from 'components/IconComments/IconComments'
 import Disqus from 'disqus-react'
+import { DISQUS_SHORT_NAME } from 'config'
 
 export default class Inner extends React.Component {
   static propTypes = {
@@ -37,13 +38,11 @@ export default class Inner extends React.Component {
       title: article.title
     }
 
-    const disqusShortname = 'kind-regards-earth'
-
     if (showComments) {
       return (
         <div className={styles.comments}>
           <Disqus.DiscussionEmbed
-            shortname={disqusShortname}
+            shortname={DISQUS_SHORT_NAME}
             config={disqusConfig} />
         </div>
       )
@@ -57,7 +56,7 @@ export default class Inner extends React.Component {
           <IconComments className={styles.btnCommentsIcon} />
           <div className={styles.btnCommentsLabel}>
             <Disqus.CommentCount
-              shortname={disqusShortname}
+              shortname={DISQUS_SHORT_NAME}
               config={disqusConfig}>
               comments
             </Disqus.CommentCount>

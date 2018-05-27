@@ -12,7 +12,7 @@ const env = require('../utils/env')
 const rules = []
 
 const getStyleLoaders = loaders => [
-  env.isProd ? 'style-loader' : MiniCssExtractPlugin.loader
+  env.isDev ? 'style-loader' : MiniCssExtractPlugin.loader
 ].concat(loaders)
 
 rules.push({
