@@ -51,7 +51,7 @@ export default class Menu extends React.Component {
                     {item.label}
                   </Link>
                 ))}
-                <a href='mailto:veerleuhlenbusch@gmail.com' className={styles.menuItem}>
+                <a href='mailto:kindregardsearth@gmail.com' className={styles.menuItem}>
                   Contact
                 </a>
               </Blanket>

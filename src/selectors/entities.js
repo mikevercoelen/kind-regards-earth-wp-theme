@@ -65,7 +65,7 @@ export const getPageBySlug = slug => createSelector(
 
 export const getPostsSortedByDate = createSelector(
   getPosts,
-  posts => posts.sort((a, b) => new Date(a.get('date')) - new Date(b.get('date')))
+  posts => posts.sort((a, b) => new Date(b.get('date')) - new Date(a.get('date')))
 )
 
 export const getLatestPost = createSelector(

@@ -35,7 +35,7 @@ const Footer = () => (
           </NavLink>
         ))}
         <a
-          href='mailto:veerleuhlenbusch@gmail.com'
+          href='mailto:kindregardsearth@gmail.com'
           className={styles.navLink}>
           Contact
         </a>

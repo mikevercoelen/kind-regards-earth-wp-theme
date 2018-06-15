@@ -44,7 +44,7 @@ const HomeTop = ({ latestPost }) => {
         </Content>
       </div>
       <ScrollDown
-        label='Articles'
+        label='Start Reading'
         to='#articles' />
     </div>
   )

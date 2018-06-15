@@ -12,7 +12,7 @@ import InfiniteScroll from 'components/InfiniteScroll/InfiniteScroll'
 import { Map } from 'immutable'
 
 import {
-  getPosts
+  getPostsSortedByDate
 } from 'selectors/entities'
 
 import {
@@ -118,7 +118,7 @@ class HomeContent extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  posts: getPosts(state),
+  posts: getPostsSortedByDate(state),
   hasMore: getHasMore(state),
   hasInitiallyLoaded: getHasInitiallyLoaded(state),
   nextPage: getNextPage(state)

@@ -47,6 +47,9 @@ class Post extends React.Component {
 
     const article = postToArticle(post)
 
+    console.log('got here')
+    console.log(article)
+
     if (!article) {
       return null
     }

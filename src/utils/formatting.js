@@ -67,7 +67,7 @@ export const postToArticle = post => {
     slug: post.get('slug'),
     link: post.get('link'),
     title: post.getIn(['title', 'rendered']),
-    date: mDate.format(`do of MMMM 'YY`),
+    date: mDate.format(`Do of MMMM 'YY`),
     description: post.getIn(['excerpt', 'rendered']),
     readingTime: post.getIn(['acf', 'readingtime']),
     youtubeId: post.getIn(['acf', 'youtubeid']),

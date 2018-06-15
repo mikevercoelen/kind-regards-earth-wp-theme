@@ -5,6 +5,14 @@
     text-align: center;
   }
 
+  img {
+    &.aligncenter {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
   .alignleft {
     text-align: left;
   }
