@@ -24,9 +24,17 @@ export default class ArticleContent extends React.Component {
     showComments: false
   }
 
-  componentDidMount () {
+  applyDropcap () {
     const dropcaps = document.querySelectorAll('.dropcap')
-    window.Dropcap.layout(dropcaps, 4)
+    window.Dropcap.layout(dropcaps, 3)
+  }
+
+  componentDidMount () {
+    this.applyDropcap()
+  }
+
+  componentDidUpdate () {
+    this.applyDropcap()
   }
 
   showComments = () => {
