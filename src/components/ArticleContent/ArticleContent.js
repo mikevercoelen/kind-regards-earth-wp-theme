@@ -26,6 +26,13 @@ export default class ArticleContent extends React.Component {
 
   applyDropcap () {
     const dropcaps = document.querySelectorAll('.dropcap')
+
+    dropcaps.forEach(cap => {
+      if (cap.dcapjsStrut) {
+        cap.dcapjsStrut = null
+      }
+    })
+
     window.Dropcap.layout(dropcaps, 3)
   }
 
@@ -85,8 +92,8 @@ export default class ArticleContent extends React.Component {
     )
   }
 
-  render () {
-    const { article, topSpace, hideDate } = this.props
+  get head () {
+    const { article } = this.props
 
     const meta = {
       title: he.decode(`${article.title} – ${WPSettings.meta.title}`),
@@ -95,17 +102,27 @@ export default class ArticleContent extends React.Component {
     }
 
     return (
-      <article
-        id='inner'
-        className={cx(styles.component, {
-          [styles.topSpace]: topSpace
-        })}>
+      <React.Fragment>
         <DocumentMeta meta={meta} />
         <Helmet>
           <title>
             {meta.title}
           </title>
         </Helmet>
+      </React.Fragment>
+    )
+  }
+
+  render () {
+    const { article, topSpace, hideDate } = this.props
+
+    return (
+      <article
+        id='inner'
+        className={cx(styles.component, {
+          [styles.topSpace]: topSpace
+        })}>
+        {this.head}
         <Content className={styles.content}>
           <div className={styles.textContent}>
             {!hideDate && (
@@ -113,9 +130,11 @@ export default class ArticleContent extends React.Component {
                 {article.date}
               </div>
             )}
-            <h1 className={styles.title}>
-              {article.title}
-            </h1>
+            <h1
+              className={styles.title}
+              dangerouslySetInnerHTML={{
+                __html: article.title
+              }} />
             {article.subtitle && (
               <h2 className={styles.subtitle}>
                 {article.subtitle}

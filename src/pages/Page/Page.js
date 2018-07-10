@@ -46,7 +46,7 @@ class Page extends React.Component {
     const { page } = this.props
     const article = pageToArticle(page)
 
-    if (!article) {
+    if (!article || (article.content === undefined)) {
       return null
     }
 

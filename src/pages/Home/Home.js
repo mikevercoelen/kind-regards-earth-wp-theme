@@ -6,6 +6,8 @@ import Page from 'components/Page/Page'
 import { connect } from 'react-redux'
 import { postsLoad } from 'actions/posts'
 import { setPageLoaded } from 'actions/app'
+import Helmet from 'react-helmet'
+import { getTitleFromSettings } from 'utils/template'
 
 const loadVideo = () => new Promise(resolve => {
   const readyChecker = setInterval(() => {
@@ -36,7 +38,12 @@ class Home extends React.Component {
 
   render () {
     return (
-      <Page>
+      <Page>w
+        <Helmet>
+          <title>
+            {getTitleFromSettings()}
+          </title>
+        </Helmet>
         <HomeTop />
         <HomeContent />
       </Page>

@@ -101,6 +101,7 @@ $btn-menu-transition-speed: 250ms;
   cursor: pointer;
   height: 100%;
   -webkit-appearance: none;
+  background: none transparent;
 
   &:hover {
     .btnMenuInner:after {

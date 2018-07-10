@@ -4,7 +4,7 @@ import ScrollDown from 'components/ScrollDown/ScrollDown'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
 
-export default class ArticleTop extends React.Component {
+export default class wkArticleTop extends React.Component {
   static propTypes = {
     article: PropTypes.object
   }
@@ -53,7 +53,8 @@ export default class ArticleTop extends React.Component {
                   enablejsapi: 1,
                   modestbranding: 1,
                   disablekb: 1,
-                  cc_load_policy: 0
+                  cc_load_policy: 0,
+                  playlist: article.youtubeId
                 }
               }}
               onReady={this.onYTReady}

@@ -79,6 +79,11 @@
     line-height: 1.5;
   }
 
+  > h1, h2, h3, h4, h5 {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
   blockquote {
     display: flex;
     padding: $space-value * 2 0;
@@ -132,6 +137,9 @@
       font-weight: 400;
       font-family: $ff-lato;
       font-size: $fs-small;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.5;
     }
   }
 }
