@@ -38,7 +38,7 @@ class Home extends React.Component {
 
   render () {
     return (
-      <Page>w
+      <Page>
         <Helmet>
           <title>
             {getTitleFromSettings()}
