@@ -72,6 +72,12 @@
   }
 }
 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .component {
+    background-color: $color-secondary;
+  }
+}
+
 .content {
   display: flex;
   height: 100%;
