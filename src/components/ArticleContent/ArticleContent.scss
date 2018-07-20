@@ -118,7 +118,7 @@
     }
   }
 
-  p a img {
+  a img {
     @include small-screen-only () {
       width: 100% !important;
       height: auto !important;
