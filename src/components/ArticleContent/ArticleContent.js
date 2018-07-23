@@ -33,7 +33,7 @@ export default class ArticleContent extends React.Component {
       }
     })
 
-    window.Dropcap.layout(dropcaps, 5)
+    window.Dropcap.layout(dropcaps, 4)
   }
 
   componentDidMount () {
