@@ -12,6 +12,9 @@ const menuItems = [{
   label: 'Home',
   to: '/'
 }, {
+  label: 'Photography',
+  to: getPageRoute('photography')
+},{
   label: 'About',
   to: getPageRoute('about')
 }]

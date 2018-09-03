@@ -92,9 +92,8 @@
 
     &:before {
       content: '';
-      flex-grow: 1;
       display: block;
-      width: 10px;
+      width: 5px;
       background-color: $color-primary;
 
       @include small-screen-only () {
